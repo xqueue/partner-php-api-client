@@ -8,6 +8,7 @@ class MailingDomain
     public string $name;
     public string $status;
     public string $createdTime;
+    private string $certificate_expires;
     public ?bool $http_reachable;
     public ?bool $https_reachable;
 
@@ -15,6 +16,7 @@ class MailingDomain
      * @param string $name
      * @param string $status
      * @param string $createdTime
+     * @param string $certificate_expires
      * @param bool|null $http_reachable
      * @param bool|null $https_reachable
      */
@@ -22,6 +24,7 @@ class MailingDomain
         string $name,
         string $status,
         string $createdTime,
+        string $certificate_expires,
         ?bool  $http_reachable,
         ?bool  $https_reachable,
     )
@@ -31,6 +34,6 @@ class MailingDomain
         $this->createdTime = $createdTime;
         $this->http_reachable = $http_reachable;
         $this->https_reachable = $https_reachable;
+        $this->certificate_expires = $certificate_expires;
     }
-
 }

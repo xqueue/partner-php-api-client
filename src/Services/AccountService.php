@@ -189,15 +189,15 @@ class AccountService extends PartnerApiService
 
     /**
      * @param int $newsletterAccountId
-     * @param int $mailingDomainId
+     * @param string $mailingDomainName
      * @return MailingDomainResponse
      * @throws MappingError
      */
-    public function getMailingDomain(int $newsletterAccountId, int $mailingDomainId): MailingDomainResponse
+    public function getMailingDomain(int $newsletterAccountId, string $mailingDomainName): MailingDomainResponse
     {
         $response = $this->getOne(
             'newsletter-accounts/' . $newsletterAccountId . '/mailing-domains',
-            $mailingDomainId,
+            $mailingDomainName,
             MailingDomain::class
         );
 
@@ -206,12 +206,15 @@ class AccountService extends PartnerApiService
 
     public function addMailingDomainToNewsletterAccount(
         int    $newsletterAccountId,
-        string $mailingDomain
+        string $mailingDomainName
     ): GeneralResponse
     {
         $response = Request::send(
             'POST',
-            'newsletter-accounts/' . $newsletterAccountId . '/mailing-domains/' . urlencode($mailingDomain),
+            'newsletter-accounts/' . $newsletterAccountId . '/mailing-domains/' . urlencode($mailingDomainName),
+            [],
+            [],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);
@@ -228,6 +231,9 @@ class AccountService extends PartnerApiService
             'GET',
             'newsletter-accounts/' . $newsletterAccountId . '/mailing-domains/' .
             urlencode($mailingDomain) . '/status',
+            [],
+            [],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);
@@ -249,7 +255,9 @@ class AccountService extends PartnerApiService
             'PUT',
             'newsletter-accounts/' . $newsletterAccountId . '/mailing-domains/' .
             urlencode($mailingDomain) . '/status',
-            ['newStatus' => $status]
+            ['newStatus' => $status],
+            [],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);

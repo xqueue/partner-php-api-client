@@ -5,6 +5,7 @@ namespace Xqueue\MaileonPartnerApiClient\Tests;
 use CuyZ\Valinor\Mapper\MappingError;
 use Dotenv\Dotenv;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Xqueue\MaileonPartnerApiClient\Entities\MailingDomain;
 use Xqueue\MaileonPartnerApiClient\Entities\NewsletterAccount;
 use Xqueue\MaileonPartnerApiClient\Services\AccountService;
 
@@ -30,6 +31,20 @@ abstract class TestCase extends BaseTestCase
     {
         $accountService = new AccountService(getenv('MAILEON_PARTNER_API_KEY'));
         $accounts = $accountService->getNewsletterAccounts();
+        $data = $accounts->getData();
+
+        return $data[0];
+    }
+
+    /**
+     * @param int $nlAccountId
+     * @return MailingDomain
+     * @throws MappingError
+     */
+    public function getOneMailingDomain(int $nlAccountId): MailingDomain
+    {
+        $accountService = new AccountService(getenv('MAILEON_PARTNER_API_KEY'));
+        $accounts = $accountService->getMailingDomains($nlAccountId);
         $data = $accounts->getData();
 
         return $data[0];

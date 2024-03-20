@@ -3,9 +3,12 @@
 namespace Xqueue\MaileonPartnerApiClient\Tests\Integrations;
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Xqueue\MaileonPartnerApiClient\Entities\MailingDomain;
 use Xqueue\MaileonPartnerApiClient\Entities\NewsletterAccount;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\CustomerAccountResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
+use Xqueue\MaileonPartnerApiClient\Http\Responses\MailingDomainResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\NewsletterAccountResponse;
 use Xqueue\MaileonPartnerApiClient\Services\AccountService;
 use Xqueue\MaileonPartnerApiClient\Tests\TestCase;
@@ -101,5 +104,63 @@ class AccountServiceTest extends TestCase
         $this->assertTrue($response->getApiResponse()->isSuccess());
         $this->assertSame(get_class($response), GeneralResponse::class);
         $this->assertIsNumeric($response->getData());
+    }
+
+    //MailingDomains
+    public function test_get_mailing_domains_success(): void
+    {
+//        $nlAccount = $this->getOneNewsLetterAccount();
+
+        $response = $this->accountService->getMailingDomains(1000000103);
+
+        $this->assertTrue($response->getApiResponse()->isSuccess());
+        $this->assertSame(get_class($response), MailingDomainResponse::class);
+        $this->assertIsArray($response->getData());
+    }
+
+    public function test_get_mailing_domain_by_id_success(): void
+    {
+        $nlAccount = $this->getOneNewsLetterAccount();
+        $domain = $this->getOneMailingDomain($nlAccount->id);
+        $response = $this->accountService->getMailingDomain($nlAccount->id, $domain->name);
+
+        $this->assertTrue($response->getApiResponse()->isSuccess());
+        $this->assertSame(get_class($response), MailingDomainResponse::class);
+        $this->assertSame(get_class($response->getData()), MailingDomain::class);
+    }
+
+    public function test_add_mailing_domain_to_newsletter_account_success(): void
+    {
+        $nlAccount = $this->getOneNewsLetterAccount();
+        $domain = $this->getOneMailingDomain($nlAccount->id);
+
+        $response = $this->accountService->addMailingDomainToNewsletterAccount(
+            $nlAccount->id,
+            Str::random(1) . $domain->name
+        );
+
+        $this->assertTrue($response->getApiResponse()->isSuccess());
+        $this->assertSame(get_class($response), GeneralResponse::class);
+    }
+
+    public function test_get_status_of_mailing_domain_success()
+    {
+        $nlAccount = $this->getOneNewsLetterAccount();
+        $domain = $this->getOneMailingDomain($nlAccount->id);
+        $response = $this->accountService->getStatusOfMailingDomain($nlAccount->id, $domain->name);
+
+        $this->assertTrue($response->getApiResponse()->isSuccess());
+        $this->assertSame(get_class($response), GeneralResponse::class);
+    }
+
+    public function test_set_status_of_mailing_domain_success()
+    {
+        $status = 'active';
+        $nlAccount = $this->getOneNewsLetterAccount();
+        $domain = $this->getOneMailingDomain($nlAccount->id);
+        $response = $this->accountService->setStatusOfMailingDomain($nlAccount->id, $domain->name, $status);
+
+        $this->assertTrue($response->getApiResponse()->isSuccess());
+        $this->assertSame(get_class($response), GeneralResponse::class);
     }
 }

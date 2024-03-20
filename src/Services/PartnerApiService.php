@@ -49,13 +49,13 @@ abstract class PartnerApiService
 
     /**
      * @param string $url
-     * @param int $id
+     * @param int|string $id
      * @param string $objectName
      * @param array $queryParams
      * @return array
      * @throws MappingError
      */
-    protected function getOne(string $url, int $id, string $objectName, array $queryParams = []): array
+    protected function getOne(string $url, int|string $id, string $objectName, array $queryParams = []): array
     {
         $response = Request::send('GET', $url . '/' . $id, $queryParams, [], $this->key);
         $data = $this->mapObject($objectName, $response->body);
