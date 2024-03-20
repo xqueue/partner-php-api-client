@@ -164,12 +164,12 @@ class AccountService extends PartnerApiService
         $response = Request::send(
             'POST',
             'newsletter-accounts/' . $id . '/status',
-            [],
             ['status' => $status],
+            [],
             $this->key
         );
 
-        return new GeneralResponse($response['body'], $response);
+        return new GeneralResponse($response->body, $response);
     }
 
     /**
