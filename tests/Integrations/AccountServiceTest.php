@@ -94,7 +94,7 @@ class AccountServiceTest extends TestCase
         $this->assertIsArray($response->getData());
     }
 
-    public function test_get_customer_account_counts(): void
+    public function test_get_customer_account_counts_success(): void
     {
         $response = $this->accountService->getCustomerAccountsCount();
 
