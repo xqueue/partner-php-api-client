@@ -33,8 +33,9 @@
     "ext-curl": "*"
   },
   "require-dev": {
+    "orchestra/testbench": "*",
     "phpunit/phpunit": "*",
-    "orchestra/testbench": "*"
+    "vlucas/phpdotenv": "^5.6"
   },
   "autoload": {
     "psr-4": {
@@ -48,9 +49,10 @@
   },
   "scripts": {
     "test": "vendor/bin/phpunit",
-    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    "test-coverage": "vendor/bin/phpunit --coverage-clover build/clover.xml"
   },
   "config": {
     "sort-packages": true
-  }
+  },
+  "version": "0.0.1"
 }

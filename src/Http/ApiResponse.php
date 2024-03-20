@@ -47,5 +47,4 @@ class ApiResponse
     {
         return 300 > $this->statusCode && $this->statusCode >= 200;
     }
-
 }
