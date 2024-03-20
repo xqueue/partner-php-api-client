@@ -109,9 +109,9 @@ class AccountServiceTest extends TestCase
     //MailingDomains
     public function test_get_mailing_domains_success(): void
     {
-//        $nlAccount = $this->getOneNewsLetterAccount();
+        $nlAccount = $this->getOneNewsLetterAccount();
 
-        $response = $this->accountService->getMailingDomains(1000000103);
+        $response = $this->accountService->getMailingDomains($nlAccount->id);
 
         $this->assertTrue($response->getApiResponse()->isSuccess());
         $this->assertSame(get_class($response), MailingDomainResponse::class);
