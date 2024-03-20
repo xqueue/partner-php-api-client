@@ -44,8 +44,8 @@ abstract class TestCase extends BaseTestCase
     public function getOneMailingDomain(int $nlAccountId): MailingDomain
     {
         $accountService = new AccountService(getenv('MAILEON_PARTNER_API_KEY'));
-        $accounts = $accountService->getMailingDomains($nlAccountId);
-        $data = $accounts->getData();
+        $domains = $accountService->getMailingDomains($nlAccountId);
+        $data = $domains->getData();
 
         return $data[0];
     }
