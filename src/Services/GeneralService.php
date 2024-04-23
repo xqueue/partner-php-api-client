@@ -14,7 +14,7 @@ class GeneralService extends PartnerApiService
      */
     public function getDomains(): GeneralResponse
     {
-        $response = Request::send('GET', 'domains');
+        $response = Request::send('GET', 'domains', [], [], $this->key);
 
         return new GeneralResponse($response->body['domains'], $response);
     }
@@ -25,7 +25,7 @@ class GeneralService extends PartnerApiService
      */
     public function validateDomain(string $domain): GeneralResponse
     {
-        $response = Request::send('GET', 'domains/validate', ['domain' => $domain]);
+        $response = Request::send('GET', 'domains/validate', ['domain' => urlencode($domain)], [], $this->key);
 
         if (!$response->isSuccess()) {
             $data = [
@@ -44,7 +44,7 @@ class GeneralService extends PartnerApiService
      */
     public function getLocales(): GeneralResponse
     {
-        $response = Request::send('GET', 'locales');
+        $response = Request::send('GET', 'locales', [], [], $this->key);
 
         return new GeneralResponse($response->body['locales'], $response);
     }
