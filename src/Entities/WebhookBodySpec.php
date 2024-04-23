@@ -9,10 +9,10 @@ class WebhookBodySpec
     public array $customFields;
 
     /**
-     * @param array $standardFields
-     * @param array $customFields
+     * @param string[] $standardFields
+     * @param string[] $customFields
      */
-    public function __construct(array $standardFields, array $customFields)
+    public function __construct(?array $standardFields = [], ?array $customFields = [])
     {
         $this->standardFields = $standardFields;
         $this->customFields = $customFields;

@@ -2,7 +2,6 @@
 
 namespace Xqueue\MaileonPartnerApiClient\Entities;
 
-use CuyZ\Valinor\Mapper\MappingError;
 use Xqueue\MaileonPartnerApiClient\Traits\MappingTrait;
 
 class Webhook
@@ -15,7 +14,6 @@ class Webhook
     public string $url;
     public int $nlAccountId;
     public array $bodySpec;
-
     public array $urlParams;
 
     /**
@@ -31,8 +29,10 @@ class Webhook
         string $event,
         string $url,
         int    $nlAccountId,
-        array  $bodySpec,
-        array  $urlParams,
+        /** @var WebhookBodySpec */
+        array  $bodySpec = [new WebhookBodySpec()],
+        /** @var WebhookUrlParam */
+        array  $urlParams = [new WebhookUrlParam('', '')],
     )
     {
         $this->id = $id;

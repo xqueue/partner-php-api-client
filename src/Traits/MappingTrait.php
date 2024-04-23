@@ -19,27 +19,7 @@ trait MappingTrait
      */
     protected function mapList(string $objectName, array $elements): array
     {
-        $mapper = (new MapperBuilder())->mapper();
-        $result = [];
-        foreach ($elements as $element) {
-            if ($objectName === Webhook::class) {
-                $bodySpecs = [];
-                foreach ($element['bodySpec'] ?? [] as $spec) {
-                    $bodySpecs[] = $mapper->map(WebhookBodySpec::class, $spec);
-                }
-                $urlParams = [];
-                foreach ($element['urlParams'] ?? [] as $param) {
-                    $urlParams[] = $mapper->map(WebhookUrlParam::class, $param);
-                }
-
-                $element->urlParams = $urlParams;
-                $element->bodySpecs = $bodySpecs;
-            }
-
-            $result[] = $mapper->map($objectName, $element);
-        }
-
-        return $result;
+        return (new MapperBuilder())->mapper()->map('array<' . $objectName . '>', $elements);
     }
 
     /**
