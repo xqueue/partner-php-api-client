@@ -4,25 +4,27 @@ namespace Xqueue\MaileonPartnerApiClient\Entities;
 
 class Blacklist
 {
+    public const KEY = 'blacklists';
+
     public int $id;
     public string $name;
     public string $type;
     public string $status;
-    public string $created;
+    public ?string $created;
 
     /**
      * @param int $id
      * @param string $name
      * @param string $type
      * @param string $status
-     * @param string $created
+     * @param string|null $created
      */
     public function __construct(
         int    $id,
         string $name,
         string $type,
         string $status,
-        string $created
+        ?string $created = ''
     )
     {
         $this->id = $id;

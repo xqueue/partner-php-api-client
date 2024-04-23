@@ -40,9 +40,6 @@ abstract class PartnerApiService
         $responseBody = $response->body;
         $responseData = $responseKey ? $responseBody[$responseKey] : $responseBody;
 
-//        if ($objectName === Webhook::class){
-//            dd($responseBody);
-//        }
         $data = $this->mapList($objectName, $responseData);
 
         return [

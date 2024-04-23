@@ -22,7 +22,7 @@ class BlacklistService extends PartnerApiService
         $response = $this->getList(
             'blacklists',
             Blacklist::class,
-            null,
+            Blacklist::KEY,
             ['page_size' => $pageSize, 'page_index' => $pageIndex]
         );
 
@@ -87,11 +87,13 @@ class BlacklistService extends PartnerApiService
                 'status' => $status,
                 'type' => $type
             ],
+            [],
+            $this->key
         );
 
-        $data = $this->mapObject(Blacklist::class, $response['data']);
+        $data = $this->mapObject(Blacklist::class, $response->body);
 
-        return new BlacklistResponse($data, $response['response']);
+        return new BlacklistResponse($data, $response);
     }
 
     /**
@@ -100,7 +102,7 @@ class BlacklistService extends PartnerApiService
      */
     public function deleteBlacklist(int $id): GeneralResponse
     {
-        $response = Request::send('DELETE', 'blacklists/' . $id);
+        $response = Request::send('DELETE', 'blacklists/' . $id, [], [], $this->key);
 
         return new GeneralResponse($response->body, $response);
     }
@@ -111,10 +113,7 @@ class BlacklistService extends PartnerApiService
      */
     public function getAccountsOfBlacklist(int $id): GeneralResponse
     {
-        $response = Request::send(
-            'GET',
-            'blacklists/' . $id . '/accounts',
-        );
+        $response = Request::send('GET', 'blacklists/' . $id . '/accounts', [], [], $this->key);
 
         return new GeneralResponse($response->body, $response);
     }
@@ -129,7 +128,9 @@ class BlacklistService extends PartnerApiService
         $response = Request::send(
             'POST',
             'blacklists/' . $id . '/accounts',
-            ['newsletterAccountIds' => $newsletterAccountIds]
+            ['newsletterAccountIds' => implode(',', $newsletterAccountIds)],
+            [],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);
@@ -146,7 +147,9 @@ class BlacklistService extends PartnerApiService
         $response = Request::send(
             'GET',
             'blacklists/' . $id . '/patterns',
-            ['page_size' => $pageSize, 'page_index' => $pageIndex]
+            ['page_size' => $pageSize, 'page_index' => $pageIndex],
+            [],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);
@@ -164,7 +167,8 @@ class BlacklistService extends PartnerApiService
             'POST',
             'blacklists/' . $id . '/patterns',
             [],
-            ['uploadName' => $uploadName, 'patterns' => $patterns]
+            ['uploadName' => $uploadName, 'patterns' => $patterns],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);

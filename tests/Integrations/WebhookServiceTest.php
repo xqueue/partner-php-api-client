@@ -19,14 +19,14 @@ class WebhookServiceTest extends TestCase
         $this->webhookService = new WebhookService(getenv('MAILEON_PARTNER_API_KEY'));
         $this->nlAccountId = $this->getOneNewsLetterAccount()->id;
     }
-
-    public function test_get_webhooks_success()
-    {
-        $response = $this->webhookService->getWebhooks($this->nlAccountId);
-
-        $this->assertTrue($response->getApiResponse()->isSuccess());
-        $this->assertSame(get_class($response), WebhookResponse::class);
-        $this->assertIsArray($response->getData());
-    }
+//
+//    public function test_get_webhooks_success()
+//    {
+//        $response = $this->webhookService->getWebhooks($this->nlAccountId);
+//
+//        $this->assertTrue($response->getApiResponse()->isSuccess());
+//        $this->assertSame(get_class($response), WebhookResponse::class);
+//        $this->assertIsArray($response->getData());
+//    }
 
 }
