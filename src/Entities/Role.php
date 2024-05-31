@@ -5,11 +5,11 @@ namespace Xqueue\MaileonPartnerApiClient\Entities;
 class Role
 {
 
-    private int $id;
-    private string $name;
-    private bool $selected;
-    private bool $custom;
-    private int $userCount;
+    public int $id;
+    public string $name;
+    public bool $selected;
+    public bool $custom;
+    public int $userCount;
 
     /**
      * @param int $id

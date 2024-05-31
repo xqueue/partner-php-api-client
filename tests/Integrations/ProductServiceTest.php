@@ -55,10 +55,10 @@ class ProductServiceTest extends TestCase
 //
 //    public function test_upload_template_success(): void
 //    {
-//
 //        $fileContent = file_get_contents(__DIR__ . '/assets/test.zip');
 //        $response = $this->productService->uploadTemplate($this->nlAccountId, base64_encode($fileContent));
 //
+//        dd($response);
 //        $this->assertTrue($response->getApiResponse()->isSuccess());
 //        $this->assertSame(get_class($response), GeneralResponse::class);
 //        $this->assertIsArray($response->getData());

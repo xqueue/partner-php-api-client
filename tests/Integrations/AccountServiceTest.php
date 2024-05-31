@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Xqueue\MaileonPartnerApiClient\Entities\MailingDomain;
 use Xqueue\MaileonPartnerApiClient\Entities\NewsletterAccount;
+use Xqueue\MaileonPartnerApiClient\Http\Responses\AccountStatusResponse;
+use Xqueue\MaileonPartnerApiClient\Http\Responses\ApiKeyResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\CustomerAccountResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\MailingDomainResponse;
@@ -72,8 +74,8 @@ class AccountServiceTest extends TestCase
         );
 
         $this->assertTrue($response->getApiResponse()->isSuccess());
-        $this->assertSame(get_class($response), GeneralResponse::class);
-        $this->assertIsString($response->getData()['apiKey']);
+        $this->assertSame(get_class($response), ApiKeyResponse::class);
+        $this->assertIsString($response->getData()->apiKey);
     }
 
     public function test_set_newsletter_account_status_success(): void
@@ -83,8 +85,8 @@ class AccountServiceTest extends TestCase
         $response = $this->accountService->setNewsletterAccountStatus($nlAccount->id, $status);
 
         $this->assertTrue($response->getApiResponse()->isSuccess());
-        $this->assertSame(get_class($response), GeneralResponse::class);
-        $this->assertEquals($status, $response->getData()['new_status']);
+        $this->assertSame(get_class($response), AccountStatusResponse::class);
+        $this->assertEquals($status, $response->getData()->new_status);
     }
 
     // CustomerAccount
@@ -136,7 +138,7 @@ class AccountServiceTest extends TestCase
 
         $response = $this->accountService->addMailingDomainToNewsletterAccount(
             $nlAccount->id,
-            Str::random(1) . $domain->name
+            Str::random(4) . $domain->name
         );
 
         $this->assertTrue($response->getApiResponse()->isSuccess());

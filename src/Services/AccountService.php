@@ -3,12 +3,16 @@
 namespace Xqueue\MaileonPartnerApiClient\Services;
 
 use CuyZ\Valinor\Mapper\MappingError;
+use Xqueue\MaileonPartnerApiClient\Entities\AccountStatus;
+use Xqueue\MaileonPartnerApiClient\Entities\ApiKey;
 use Xqueue\MaileonPartnerApiClient\Entities\CustomerAccount;
 use Xqueue\MaileonPartnerApiClient\Entities\MailingDomain;
 use Xqueue\MaileonPartnerApiClient\Entities\NewsletterAccount;
 use Xqueue\MaileonPartnerApiClient\Http\Request;
-use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
+use Xqueue\MaileonPartnerApiClient\Http\Responses\AccountStatusResponse;
+use Xqueue\MaileonPartnerApiClient\Http\Responses\ApiKeyResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\CustomerAccountResponse;
+use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\MailingDomainResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\NewsletterAccountResponse;
 
@@ -116,7 +120,8 @@ class AccountService extends PartnerApiService
      * @param string $notificationLocale
      * @param array $notificationEmails
      * @param array $ipWhitelist
-     * @return GeneralResponse
+     * @return ApiKeyResponse
+     * @throws MappingError
      */
     public function createNewsletterAccountApiKey(
         int    $newsletterAccountId,
@@ -126,7 +131,7 @@ class AccountService extends PartnerApiService
         string $notificationLocale,
         array  $notificationEmails,
         array  $ipWhitelist
-    ): GeneralResponse
+    ): ApiKeyResponse
     {
         $data = [
             'description' => $description,
@@ -138,8 +143,9 @@ class AccountService extends PartnerApiService
         ];
 
         $response = $this->create('newsletter-accounts/' . $newsletterAccountId . '/apikey', $data);
+        $data = $this->mapObject(ApiKey::class, $response['data']);
 
-        return new GeneralResponse($response['data'], $response['response']);
+        return new ApiKeyResponse($data, $response['response']);
     }
 
     /**
@@ -157,9 +163,10 @@ class AccountService extends PartnerApiService
     /**
      * @param int $id
      * @param string $status
-     * @return GeneralResponse
+     * @return AccountStatusResponse
+     * @throws MappingError
      */
-    public function setNewsletterAccountStatus(int $id, string $status): GeneralResponse
+    public function setNewsletterAccountStatus(int $id, string $status): AccountStatusResponse
     {
         $response = Request::send(
             'POST',
@@ -169,7 +176,10 @@ class AccountService extends PartnerApiService
             $this->key
         );
 
-        return new GeneralResponse($response->body, $response);
+
+        $data = $this->mapObject(AccountStatus::class, $response->body);
+
+        return new AccountStatusResponse($data, $response);
     }
 
     /**
