@@ -86,7 +86,9 @@ class WebhookService extends PartnerApiService
         $response = Request::send(
             'DELETE',
             'settings/webhooks/' . $webhookId,
-            ['nl_account_id' => $newsletterAccountId]
+            ['nl_account_id' => $newsletterAccountId],
+            [],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);

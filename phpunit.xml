@@ -8,6 +8,7 @@
     <testsuites>
         <testsuite name="Integration Tests">
             <directory suffix="Test.php">./tests/Integrations</directory>
+<!--            <file>./tests/Integrations/JobServiceTest.php</file>-->
         </testsuite>
     </testsuites>
     <coverage>

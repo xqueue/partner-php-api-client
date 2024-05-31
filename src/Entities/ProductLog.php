@@ -21,7 +21,7 @@ class ProductLog
         string  $event,
         string  $createdUser,
         string  $createdTime,
-        ?string $details,
+        ?string $details = null,
     )
     {
         $this->event = $event;

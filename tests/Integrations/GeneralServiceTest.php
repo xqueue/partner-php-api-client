@@ -2,7 +2,6 @@
 
 namespace Xqueue\MaileonPartnerApiClient\Tests\Integrations;
 
-use Illuminate\Support\Str;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
 use Xqueue\MaileonPartnerApiClient\Services\GeneralService;
 use Xqueue\MaileonPartnerApiClient\Tests\TestCase;
@@ -18,7 +17,7 @@ class GeneralServiceTest extends TestCase
         $this->generalService = new GeneralService(getenv('MAILEON_PARTNER_API_KEY'));
     }
 
-    public function test_get_locales_success()
+    public function test_get_locales_success(): void
     {
         $response = $this->generalService->getLocales();
 
@@ -27,7 +26,7 @@ class GeneralServiceTest extends TestCase
         $this->assertIsArray($response->getData());
     }
 
-    public function test_get_domains_success()
+    public function test_get_domains_success(): void
     {
         $response = $this->generalService->getDomains();
 
@@ -36,7 +35,7 @@ class GeneralServiceTest extends TestCase
         $this->assertIsArray($response->getData());
     }
 
-    public function test_validate_domain_success()
+    public function test_validate_domain_success(): void
     {
         $response = $this->generalService->validateDomain('test.customer.com');
         $responseData = $response->getData();

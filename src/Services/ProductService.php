@@ -51,7 +51,8 @@ class ProductService extends PartnerApiService
             [
                 'active' => $active,
                 'timeRestricted' => $timeRestricted
-            ]
+            ],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);
@@ -69,7 +70,7 @@ class ProductService extends PartnerApiService
     ): ProductLogResponse
     {
         $response = $this->getList(
-            'settings/products/' . $productName,
+            'settings/products/' . $productName . '/logs',
             ProductLog::class,
             ProductLog::KEY,
             ['nl_account_id' => $newsletterAccountId]
@@ -80,19 +81,20 @@ class ProductService extends PartnerApiService
 
     /**
      * @param int $newsletterAccountId
-     * @param string $base64encoded
+     * @param string $base64encodedFile
      * @return GeneralResponse
      */
     public function uploadTemplate(
         int    $newsletterAccountId,
-        string $base64encoded
+        string $base64encodedFile
     ): GeneralResponse
     {
         $response = Request::send(
             'POST',
             'media/templates/',
             ['nl_account_id' => $newsletterAccountId],
-            ['content' => $base64encoded]
+            ['content' => $base64encodedFile],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);

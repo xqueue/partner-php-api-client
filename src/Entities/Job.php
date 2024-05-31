@@ -14,6 +14,7 @@ class Job
     public ?int $account_id;
     public ?int $customer_id;
     public ?string $domain;
+    private string $locale;
 
     /**
      * @param string $job_type
@@ -22,6 +23,7 @@ class Job
      * @param string $newsletterAccountName
      * @param string $createdUser
      * @param string $createdTime
+     * @param string|null $locale
      * @param int|null $account_id
      * @param int|null $customer_id
      * @param string|null $domain
@@ -33,9 +35,10 @@ class Job
         string  $newsletterAccountName,
         string  $createdUser,
         string  $createdTime,
-        ?int    $account_id,
-        ?int    $customer_id,
-        ?string $domain
+        ?string $locale = '',
+        ?int    $account_id = null,
+        ?int    $customer_id = null,
+        ?string $domain = ''
     )
     {
         $this->job_type = $job_type;
@@ -47,5 +50,6 @@ class Job
         $this->account_id = $account_id;
         $this->customer_id = $customer_id;
         $this->domain = $domain;
+        $this->locale = $locale;
     }
 }

@@ -40,10 +40,10 @@ class UserService extends PartnerApiService
     public function createUserAccount(
         int     $newsletterAccountId,
         string  $email,
-        ?string $firstName,
-        ?string $lastName,
-        ?string $locale,
-        ?string $theme,
+        ?string $firstName = null,
+        ?string $lastName = null,
+        ?string $locale = null,
+        ?string $theme = null,
     ): GeneralResponse
     {
         $response = $this->create(
@@ -53,11 +53,11 @@ class UserService extends PartnerApiService
                 'first_name' => $firstName,
                 'last_name' => $lastName,
                 'locale' => $locale,
-                'theme' => $theme
+                'theme' => $theme,
             ],
             ['nl_account_id' => $newsletterAccountId]
         );
-
+        dd($response);
         return new GeneralResponse($response['data'], $response['response']);
     }
 

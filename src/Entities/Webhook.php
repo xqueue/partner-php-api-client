@@ -13,7 +13,7 @@ class Webhook
     public string $event;
     public string $url;
     public int $nlAccountId;
-    public array $bodySpec;
+    public WebhookBodySpec $bodySpec;
     public array $urlParams;
 
     /**
@@ -21,18 +21,16 @@ class Webhook
      * @param string $event
      * @param string $url
      * @param int $nlAccountId
-     * @param WebhookBodySpec[] $bodySpec
-     * @param WebhookUrlParam[] $urlParams
+     * @param WebhookBodySpec $bodySpec
+     * @param array $urlParams
      */
     public function __construct(
-        int    $id,
-        string $event,
-        string $url,
-        int    $nlAccountId,
-        /** @var WebhookBodySpec */
-        array  $bodySpec = [new WebhookBodySpec()],
-        /** @var WebhookUrlParam */
-        array  $urlParams = [new WebhookUrlParam('', '')],
+        int             $id,
+        string          $event,
+        string          $url,
+        int             $nlAccountId,
+        WebhookBodySpec $bodySpec = new WebhookBodySpec(),
+        array $urlParams = [],
     )
     {
         $this->id = $id;

@@ -22,7 +22,7 @@ class BlacklistServiceTest extends TestCase
         $this->nlAccountId = $this->getOneNewsLetterAccount()->id;
     }
 
-    public function test_get_blacklists_success()
+    public function test_get_blacklists_success(): void
     {
         $response = $this->blacklistService->getBlacklists(1, 10);
 
@@ -31,7 +31,7 @@ class BlacklistServiceTest extends TestCase
         $this->assertIsArray($response->getData());
     }
 
-    public function test_create_blacklist_success()
+    public function test_create_blacklist_success(): void
     {
         $response = $this->blacklistService->createBlacklist(Str::uuid(), 'active');
 
@@ -42,7 +42,7 @@ class BlacklistServiceTest extends TestCase
         $this->blacklistService->deleteBlacklist($response->getData()->id);
     }
 
-    public function test_delete_blacklist_success()
+    public function test_delete_blacklist_success(): void
     {
         $created = $this->blacklistService->createBlacklist(Str::uuid(), 'active');
 
@@ -52,7 +52,7 @@ class BlacklistServiceTest extends TestCase
         $this->assertSame(get_class($response), GeneralResponse::class);
     }
 
-    public function test_get_blacklist_by_id_success()
+    public function test_get_blacklist_by_id_success(): void
     {
         $created = $this->blacklistService->createBlacklist(Str::uuid(), 'active');
 
@@ -65,7 +65,7 @@ class BlacklistServiceTest extends TestCase
         $this->blacklistService->deleteBlacklist($created->getData()->id);
     }
 
-    public function test_update_blacklist_success()
+    public function test_update_blacklist_success(): void
     {
         $created = $this->blacklistService->createBlacklist(Str::uuid(), 'active');
 
@@ -82,7 +82,7 @@ class BlacklistServiceTest extends TestCase
 
 
     // Accounts of blacklist
-    public function test_get_accounts_of_blacklist_success()
+    public function test_get_accounts_of_blacklist_success(): void
     {
         $created = $this->blacklistService->createBlacklist(Str::uuid(), 'active');
 
@@ -95,7 +95,7 @@ class BlacklistServiceTest extends TestCase
         $this->blacklistService->deleteBlacklist($created->getData()->id);
     }
 
-    public function test_create_account_of_blacklist_success()
+    public function test_create_account_of_blacklist_success(): void
     {
         $created = $this->blacklistService->createBlacklist(Str::uuid(), 'active');
 
@@ -108,7 +108,7 @@ class BlacklistServiceTest extends TestCase
         $this->blacklistService->deleteBlacklist($created->getData()->id);
     }
 
-    public function test_get_patterns_of_blacklist_success()
+    public function test_get_patterns_of_blacklist_success(): void
     {
         $created = $this->blacklistService->createBlacklist(Str::uuid(), 'active');
 
@@ -121,7 +121,7 @@ class BlacklistServiceTest extends TestCase
         $this->blacklistService->deleteBlacklist($created->getData()->id);
     }
 
-    public function test_update_patterns_of_blacklist_success()
+    public function test_update_patterns_of_blacklist_success(): void
     {
         $created = $this->blacklistService->createBlacklist(Str::uuid(), 'active');
 

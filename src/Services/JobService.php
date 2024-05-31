@@ -25,7 +25,7 @@ class JobService extends PartnerApiService
      */
     public function getJobs(): JobResponse
     {
-        $response = $this->getList('account-jobs', Job::class);
+        $response = $this->getList('account-jobs', Job::class, Job::KEY);
 
         return new JobResponse($response['data'], $response['response']);
     }
@@ -62,15 +62,15 @@ class JobService extends PartnerApiService
         string  $locale,
         string  $type,
         string  $author,
+        string $customerAccountName,
+        string $newsletterAccountName,
+        ?string $customDomain = null,
+        ?string $providedDomain = null,
+        ?string $subdomain = null,
         ?bool   $customDns = null,
         ?int    $accountTemplateId = null,
         ?array  $users = null,
         ?int    $customerAccountId = null,
-        ?string $customerAccountName = null,
-        ?string $newsletterAccountName = null,
-        ?string $customDomain = null,
-        ?string $providedDomain = null,
-        ?string $subdomain = null,
         ?bool   $domainAsLogin = null
     ): GeneralResponse
     {

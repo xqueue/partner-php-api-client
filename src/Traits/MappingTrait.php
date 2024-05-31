@@ -5,8 +5,6 @@ namespace Xqueue\MaileonPartnerApiClient\Traits;
 use CuyZ\Valinor\Mapper\MappingError;
 use CuyZ\Valinor\MapperBuilder;
 use Xqueue\MaileonPartnerApiClient\Entities\Webhook;
-use Xqueue\MaileonPartnerApiClient\Entities\WebhookBodySpec;
-use Xqueue\MaileonPartnerApiClient\Entities\WebhookUrlParam;
 
 trait MappingTrait
 {
@@ -19,6 +17,14 @@ trait MappingTrait
      */
     protected function mapList(string $objectName, array $elements): array
     {
+        if ($objectName === Webhook::class) {
+            return (new MapperBuilder())
+                ->allowSuperfluousKeys()
+                ->allowPermissiveTypes()
+                ->mapper()
+                ->map('array<' . $objectName . '>', $elements);
+        }
+
         return (new MapperBuilder())->mapper()->map('array<' . $objectName . '>', $elements);
     }
 
@@ -30,6 +36,14 @@ trait MappingTrait
      */
     protected function mapObject(string $objectName, array $data): mixed
     {
+        if ($objectName === Webhook::class) {
+            return (new MapperBuilder())
+                ->allowSuperfluousKeys()
+                ->allowPermissiveTypes()
+                ->mapper()
+                ->map($objectName, $data);
+        }
+
         return (new MapperBuilder())->mapper()->map($objectName, $data);
     }
 }

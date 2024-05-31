@@ -19,7 +19,9 @@ class ContingentService extends PartnerApiService
         $response = Request::send(
             'GET',
             'settings/prepaids/status',
-            ['nl_account_id' => $newsletterAccountId]
+            ['nl_account_id' => $newsletterAccountId],
+            [],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);
@@ -36,7 +38,8 @@ class ContingentService extends PartnerApiService
             'POST',
             'settings/prepaids/status',
             ['nl_account_id' => $newsletterAccountId],
-            ['active' => $active]
+            ['active' => $active],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);
@@ -78,19 +81,21 @@ class ContingentService extends PartnerApiService
         string $name
     ): ContingentResponse
     {
-        $response = $this->create(
+        $response = Request::send(
+            'PUT',
             'settings/prepaids/contingents',
+            ['nl_account_id' => $newsletterAccountId],
             [
                 'expiryDate' => $expiryDate,
                 'contingentValue' => $contingentValue,
                 'name' => $name
             ],
-            ['nl_account_id' => $newsletterAccountId],
+            $this->key
         );
 
-        $data = $this->mapObject(Contingent::class, $response['data']);
+        $data = $this->mapObject(Contingent::class, $response->body);
 
-        return new ContingentResponse($data, $response['response']);
+        return new ContingentResponse($data, $response);
     }
 
     /**
@@ -124,8 +129,8 @@ class ContingentService extends PartnerApiService
         int    $newsletterAccountId,
         string $contingentId,
         string $expiryDate,
+        string $name,
         int    $contingentValue,
-        string $name
     ): ContingentResponse
     {
         $response = Request::send(
@@ -137,11 +142,12 @@ class ContingentService extends PartnerApiService
                 'contingentValue' => $contingentValue,
                 'name' => $name
             ],
+            $this->key
         );
 
-        $data = $this->mapObject(Contingent::class, $response['data']);
+        $data = $this->mapObject(Contingent::class, $response->body);
 
-        return new ContingentResponse($data, $response['response']);
+        return new ContingentResponse($data, $response);
     }
 
     /**
@@ -157,7 +163,9 @@ class ContingentService extends PartnerApiService
         $response = Request::send(
             'DELETE',
             'settings/prepaids/contingents/contingent/' . $contingentId,
-            ['nl_account_id' => $newsletterAccountId]
+            ['nl_account_id' => $newsletterAccountId],
+            [],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);
