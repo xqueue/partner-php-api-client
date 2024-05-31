@@ -31,8 +31,8 @@ class UserService extends PartnerApiService
     /**
      * @param int $newsletterAccountId
      * @param string $email
-     * @param string|null $firstName
-     * @param string|null $lastName
+     * @param string $firstName
+     * @param string $lastName
      * @param string|null $locale
      * @param string|null $theme
      * @return GeneralResponse
@@ -40,14 +40,14 @@ class UserService extends PartnerApiService
     public function createUserAccount(
         int     $newsletterAccountId,
         string  $email,
-        ?string $firstName = null,
-        ?string $lastName = null,
+        string  $firstName,
+        string  $lastName,
         ?string $locale = null,
         ?string $theme = null,
     ): GeneralResponse
     {
         $response = $this->create(
-            'settings/user',
+            'settings/users',
             [
                 'email' => $email,
                 'first_name' => $firstName,
@@ -57,7 +57,7 @@ class UserService extends PartnerApiService
             ],
             ['nl_account_id' => $newsletterAccountId]
         );
-        dd($response);
+
         return new GeneralResponse($response['data'], $response['response']);
     }
 
@@ -71,7 +71,9 @@ class UserService extends PartnerApiService
         $response = Request::send(
             'DELETE',
             'settings/users/' . $email,
-            ['nl_account_id' => $newsletterAccountId]
+            ['nl_account_id' => $newsletterAccountId],
+            [],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);
@@ -91,7 +93,9 @@ class UserService extends PartnerApiService
             [
                 'nl_account_id' => $newsletterAccountId,
                 'roleName' => $roleName
-            ]
+            ],
+            [],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);
@@ -111,7 +115,9 @@ class UserService extends PartnerApiService
             [
                 'nl_account_id' => $newsletterAccountId,
                 'roleName' => $roleName
-            ]
+            ],
+            [],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);

@@ -35,9 +35,18 @@ class GeneralServiceTest extends TestCase
         $this->assertIsArray($response->getData());
     }
 
-    public function test_validate_domain_success(): void
+    public function test_validate_domain_invalid_success(): void
     {
         $response = $this->generalService->validateDomain('test.customer.com');
+        $responseData = $response->getData();
+
+        $this->assertSame(get_class($response), GeneralResponse::class);
+        $this->assertIsArray($responseData);
+        $this->assertIsBool($responseData['isSuccess']);
+    }
+    public function test_validate_domain_valid_success(): void
+    {
+        $response = $this->generalService->validateDomain('subdomain.maileon.de');
         $responseData = $response->getData();
 
         $this->assertSame(get_class($response), GeneralResponse::class);

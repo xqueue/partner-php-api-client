@@ -23,7 +23,8 @@ class RoleService extends PartnerApiService
             [
                 'name' => $roleName,
                 'permissions' => $permissions
-            ]
+            ],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);
@@ -39,7 +40,9 @@ class RoleService extends PartnerApiService
         $response = Request::send(
             'DELETE',
             'settings/roles/' . $roleName,
-            ['nl_account_id' => $newsletterAccountId]
+            ['nl_account_id' => $newsletterAccountId],
+            [],
+            $this->key
         );
 
         return new GeneralResponse($response->body, $response);

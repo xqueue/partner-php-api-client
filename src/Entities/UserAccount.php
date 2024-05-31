@@ -19,7 +19,7 @@ class UserAccount
      * @param string $lastName
      * @param string $theme
      * @param string $locale
-     * @param array $roles
+     * @param Role[] $roles
      * @param string $created
      */
     public function __construct(

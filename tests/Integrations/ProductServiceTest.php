@@ -52,17 +52,12 @@ class ProductServiceTest extends TestCase
 //        $this->assertSame(get_class($response), ProductResponse::class);
 //        $this->assertIsArray($response->getData());
 //    }
-
-    //TODO
+//
 //    public function test_upload_template_success(): void
 //    {
-//        $filename = 'data.zip';
-//        $zip = new ZipArchive();
-//        $zip->open($filename, ZipArchive::CREATE);
-//        $zip->addFromString('test.html', '<p>test</p>');
-//        $zip->close();
 //
-//        $response = $this->productService->uploadTemplate($this->nlAccountId, base64_encode(file_get_contents($filename)));
+//        $fileContent = file_get_contents(__DIR__ . '/assets/test.zip');
+//        $response = $this->productService->uploadTemplate($this->nlAccountId, base64_encode($fileContent));
 //
 //        $this->assertTrue($response->getApiResponse()->isSuccess());
 //        $this->assertSame(get_class($response), GeneralResponse::class);
