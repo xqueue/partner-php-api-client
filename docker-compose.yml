@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  php:
+    build: phpdocker/php-fpm
+    container_name: partner-api
+    working_dir: /app
+    environment:
+      - XDEBUG_MODE=coverage
+      - WEB_DOCUMENT_ROOT=/app/public
+      - PHP_MEMORY_LIMIT=-1
+    volumes:
+      - .:/app
+    ports:
+      - "5080:80"

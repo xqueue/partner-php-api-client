@@ -1,0 +1,59 @@
+{
+  "name": "xqueue/maileon-partner-api-client",
+  "description": "Partner API Client to XQ:Maileon",
+  "keywords": [
+    "XQueue",
+    "Maileon",
+    "Partner API"
+  ],
+  "homepage": "https://www.maileon.de",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "XQueue GmbH, Marcus Beckerle",
+      "email": "marcus.beckerle@xqueue.com"
+    },
+    {
+      "name": "XQueue GmbH, Andreas Lange",
+      "email": "andreas.lange@xqueue.com"
+    },
+    {
+      "name": "XQueue GmbH, Daniel Dietz",
+      "email": "daniel.dietz@xqueue.com"
+    },
+    {
+      "name": "XQueue GmbH, Tibor Cser",
+      "email": "tibor.cser@xqueue.com"
+    }
+  ],
+  "require": {
+    "php": "^8.1",
+    "cuyz/valinor": "^1.9.0",
+    "ext-curl": "*"
+  },
+  "require-dev": {
+    "orchestra/testbench": "*",
+    "phpunit/phpunit": "*",
+    "vlucas/phpdotenv": "^5.6",
+    "ext-zip": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Xqueue\\MaileonPartnerApiClient\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Xqueue\\MaileonPartnerApiClient\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-coverage": "vendor/bin/phpunit --coverage-clover build/clover.xml"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "version": "0.0.1"
+}
