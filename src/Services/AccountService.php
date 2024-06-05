@@ -21,8 +21,9 @@ class AccountService extends PartnerApiService
     /**
      * @param string|null $createdSince
      * @param string|null $createdUntil
-     * @param int|null $distributorAccountId
-     * @param bool|null $includeSubpartners
+     * @param int|null    $distributorAccountId
+     * @param bool|null   $includeSubpartners
+     *
      * @return NewsletterAccountResponse
      * @throws MappingError
      */
@@ -31,8 +32,7 @@ class AccountService extends PartnerApiService
         ?string $createdUntil = null,
         ?int    $distributorAccountId = null,
         ?bool   $includeSubpartners = false
-    ): NewsletterAccountResponse
-    {
+    ): NewsletterAccountResponse {
         $queryParams = $this->getQueryParams($createdSince, $createdUntil, $distributorAccountId, $includeSubpartners);
 
         $response = $this->getList(
@@ -48,8 +48,31 @@ class AccountService extends PartnerApiService
     /**
      * @param string|null $createdSince
      * @param string|null $createdUntil
-     * @param int|null $distributorAccountId
-     * @param bool|null $includeSubpartners
+     * @param int|null    $distributorAccountId
+     * @param bool|null   $includeSubpartners
+     *
+     * @return array
+     */
+    private function getQueryParams(
+        ?string $createdSince = null,
+        ?string $createdUntil = null,
+        ?int    $distributorAccountId = null,
+        ?bool   $includeSubpartners = false
+    ): array {
+        return [
+            'createdSince'         => $createdSince,
+            'createdUntil'         => $createdUntil,
+            'distributorAccountId' => $distributorAccountId,
+            'includeSubpartners'   => $includeSubpartners,
+        ];
+    }
+
+    /**
+     * @param string|null $createdSince
+     * @param string|null $createdUntil
+     * @param int|null    $distributorAccountId
+     * @param bool|null   $includeSubpartners
+     *
      * @return GeneralResponse
      */
     public function getNewsletterAccountsCount(
@@ -57,10 +80,9 @@ class AccountService extends PartnerApiService
         ?string $createdUntil = null,
         ?int    $distributorAccountId = null,
         ?bool   $includeSubpartners = false
-    ): GeneralResponse
-    {
+    ): GeneralResponse {
         $queryParams = $this->getQueryParams($createdSince, $createdUntil, $distributorAccountId, $includeSubpartners);
-        $response = $this->getCount('newsletter-accounts/count', NewsletterAccount::KEY, $queryParams);
+        $response    = $this->getCount('newsletter-accounts/count', NewsletterAccount::KEY, $queryParams);
 
         return new GeneralResponse($response['data'], $response['response']);
     }
@@ -68,8 +90,9 @@ class AccountService extends PartnerApiService
     /**
      * @param string|null $createdSince
      * @param string|null $createdUntil
-     * @param int|null $distributorAccountId
-     * @param bool|null $includeSubpartners
+     * @param int|null    $distributorAccountId
+     * @param bool|null   $includeSubpartners
+     *
      * @return CustomerAccountResponse
      * @throws MappingError
      */
@@ -78,8 +101,7 @@ class AccountService extends PartnerApiService
         ?string $createdUntil = null,
         ?int    $distributorAccountId = null,
         ?bool   $includeSubpartners = false
-    ): CustomerAccountResponse
-    {
+    ): CustomerAccountResponse {
         $queryParams = $this->getQueryParams($createdSince, $createdUntil, $distributorAccountId, $includeSubpartners);
 
         $response = $this->getList(
@@ -95,8 +117,9 @@ class AccountService extends PartnerApiService
     /**
      * @param string|null $createdSince
      * @param string|null $createdUntil
-     * @param int|null $distributorAccountId
-     * @param bool|null $includeSubpartners
+     * @param int|null    $distributorAccountId
+     * @param bool|null   $includeSubpartners
+     *
      * @return GeneralResponse
      */
     public function getCustomerAccountsCount(
@@ -104,22 +127,22 @@ class AccountService extends PartnerApiService
         ?string $createdUntil = null,
         ?int    $distributorAccountId = null,
         ?bool   $includeSubpartners = false
-    ): GeneralResponse
-    {
+    ): GeneralResponse {
         $queryParams = $this->getQueryParams($createdSince, $createdUntil, $distributorAccountId, $includeSubpartners);
-        $response = $this->getCount('customer-accounts/count', CustomerAccount::KEY, $queryParams);
+        $response    = $this->getCount('customer-accounts/count', CustomerAccount::KEY, $queryParams);
 
         return new GeneralResponse($response['data'], $response['response']);
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $description
      * @param string $expirationDate
      * @param string $notificationDate
      * @param string $notificationLocale
-     * @param array $notificationEmails
-     * @param array $ipWhitelist
+     * @param array  $notificationEmails
+     * @param array  $ipWhitelist
+     *
      * @return ApiKeyResponse
      * @throws MappingError
      */
@@ -131,25 +154,25 @@ class AccountService extends PartnerApiService
         string $notificationLocale,
         array  $notificationEmails,
         array  $ipWhitelist
-    ): ApiKeyResponse
-    {
+    ): ApiKeyResponse {
         $data = [
-            'description' => $description,
-            'expirationDate' => $expirationDate,
+            'description'        => $description,
+            'expirationDate'     => $expirationDate,
             'notificationEmails' => $notificationEmails,
-            'notificationDate' => $notificationDate,
+            'notificationDate'   => $notificationDate,
             'notificationLocale' => $notificationLocale,
-            'ipWhitelist' => $ipWhitelist,
+            'ipWhitelist'        => $ipWhitelist,
         ];
 
         $response = $this->create('newsletter-accounts/' . $newsletterAccountId . '/apikey', $data);
-        $data = $this->mapObject(ApiKey::class, $response['data']);
+        $data     = $this->mapObject(ApiKey::class, $response['data']);
 
         return new ApiKeyResponse($data, $response['response']);
     }
 
     /**
      * @param int $id
+     *
      * @return NewsletterAccountResponse
      * @throws MappingError
      */
@@ -161,8 +184,9 @@ class AccountService extends PartnerApiService
     }
 
     /**
-     * @param int $id
+     * @param int    $id
      * @param string $status
+     *
      * @return AccountStatusResponse
      * @throws MappingError
      */
@@ -176,7 +200,6 @@ class AccountService extends PartnerApiService
             $this->key
         );
 
-
         $data = $this->mapObject(AccountStatus::class, $response->body);
 
         return new AccountStatusResponse($data, $response);
@@ -184,6 +207,7 @@ class AccountService extends PartnerApiService
 
     /**
      * @param int $newsletterAccountId
+     *
      * @return MailingDomainResponse
      * @throws MappingError
      */
@@ -198,8 +222,9 @@ class AccountService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $mailingDomainName
+     *
      * @return MailingDomainResponse
      * @throws MappingError
      */
@@ -217,8 +242,7 @@ class AccountService extends PartnerApiService
     public function addMailingDomainToNewsletterAccount(
         int    $newsletterAccountId,
         string $mailingDomainName
-    ): GeneralResponse
-    {
+    ): GeneralResponse {
         $response = Request::send(
             'POST',
             'newsletter-accounts/' . $newsletterAccountId . '/mailing-domains/' . urlencode($mailingDomainName),
@@ -231,8 +255,9 @@ class AccountService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $mailingDomain
+     *
      * @return GeneralResponse
      */
     public function getStatusOfMailingDomain(int $newsletterAccountId, string $mailingDomain): GeneralResponse
@@ -250,17 +275,17 @@ class AccountService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $mailingDomain
      * @param string $status
+     *
      * @return GeneralResponse
      */
     public function setStatusOfMailingDomain(
         int    $newsletterAccountId,
         string $mailingDomain,
         string $status
-    ): GeneralResponse
-    {
+    ): GeneralResponse {
         $response = Request::send(
             'PUT',
             'newsletter-accounts/' . $newsletterAccountId . '/mailing-domains/' .
@@ -271,27 +296,5 @@ class AccountService extends PartnerApiService
         );
 
         return new GeneralResponse($response->body, $response);
-    }
-
-    /**
-     * @param string|null $createdSince
-     * @param string|null $createdUntil
-     * @param int|null $distributorAccountId
-     * @param bool|null $includeSubpartners
-     * @return array
-     */
-    private function getQueryParams(
-        ?string $createdSince = null,
-        ?string $createdUntil = null,
-        ?int    $distributorAccountId = null,
-        ?bool   $includeSubpartners = false
-    ): array
-    {
-        return [
-            'createdSince' => $createdSince,
-            'createdUntil' => $createdUntil,
-            'distributorAccountId' => $distributorAccountId,
-            'includeSubpartners' => $includeSubpartners,
-        ];
     }
 }

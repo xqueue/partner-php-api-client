@@ -9,7 +9,7 @@ class AccountStatusResponse extends BaseResponse
 {
     /**
      * @param AccountStatus|AccountStatus[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse                   $response
      */
     public function __construct(AccountStatus|array $data, ApiResponse $response)
     {
@@ -19,7 +19,7 @@ class AccountStatusResponse extends BaseResponse
     /**
      * @return AccountStatus|AccountStatus[]
      */
-    public  function getData(): AccountStatus|array
+    public function getData(): AccountStatus|array
     {
         return $this->data;
     }

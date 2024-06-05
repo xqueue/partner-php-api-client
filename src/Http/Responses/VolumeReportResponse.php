@@ -10,7 +10,7 @@ class VolumeReportResponse extends BaseResponse
 
     /**
      * @param VolumeReport|VolumeReport[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse                 $response
      */
     public function __construct(VolumeReport|array $data, ApiResponse $response)
     {
@@ -20,7 +20,7 @@ class VolumeReportResponse extends BaseResponse
     /**
      * @return VolumeReport|VolumeReport[]
      */
-    public  function getData(): VolumeReport|array
+    public function getData(): VolumeReport|array
     {
         return $this->data;
     }

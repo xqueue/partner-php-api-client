@@ -10,7 +10,7 @@ class ReportCSAResponse extends BaseResponse
 
     /**
      * @param ReportCSA|ReportCSA[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse           $response
      */
     public function __construct(ReportCSA|array $data, ApiResponse $response)
     {
@@ -20,7 +20,7 @@ class ReportCSAResponse extends BaseResponse
     /**
      * @return ReportCSA|ReportCSA[]
      */
-    public  function getData(): ReportCSA|array
+    public function getData(): ReportCSA|array
     {
         return $this->data;
     }

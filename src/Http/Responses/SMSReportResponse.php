@@ -10,7 +10,7 @@ class SMSReportResponse extends BaseResponse
 
     /**
      * @param SMSReport|SMSReport[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse           $response
      */
     public function __construct(SMSReport|array $data, ApiResponse $response)
     {
@@ -20,7 +20,7 @@ class SMSReportResponse extends BaseResponse
     /**
      * @return SMSReport|SMSReport[]
      */
-    public  function getData(): SMSReport|array
+    public function getData(): SMSReport|array
     {
         return $this->data;
     }

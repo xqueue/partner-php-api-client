@@ -10,7 +10,7 @@ class NewsletterAccountResponse extends BaseResponse
 
     /**
      * @param NewsletterAccount|NewsletterAccount[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse                           $response
      */
     public function __construct(NewsletterAccount|array $data, ApiResponse $response)
     {

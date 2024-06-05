@@ -15,6 +15,6 @@ class WebhookBodySpec
     public function __construct(?array $standardFields = [], ?array $customFields = [])
     {
         $this->standardFields = $standardFields;
-        $this->customFields = $customFields;
+        $this->customFields   = $customFields;
     }
 }

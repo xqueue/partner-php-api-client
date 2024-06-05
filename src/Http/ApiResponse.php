@@ -2,26 +2,23 @@
 
 namespace Xqueue\MaileonPartnerApiClient\Http;
 
-use Xqueue\MaileonPartnerApiClient\Entities\CustomerAccount;
-use Xqueue\MaileonPartnerApiClient\Entities\NewsletterAccount;
-
 class ApiResponse
 {
 
-    public array $body;
-    public array $headers;
-    public int $statusCode;
+    public array  $body;
+    public array  $headers;
+    public int    $statusCode;
     public string $error;
-    public array $info;
-    public float $time;
+    public array  $info;
+    public float  $time;
 
     /**
-     * @param array $body
-     * @param array $headers
-     * @param int $statusCode
+     * @param array  $body
+     * @param array  $headers
+     * @param int    $statusCode
      * @param string $error
-     * @param array $info
-     * @param float $time
+     * @param array  $info
+     * @param float  $time
      */
     public function __construct(
         array  $body,
@@ -30,14 +27,13 @@ class ApiResponse
         string $error,
         array  $info,
         float  $time,
-    )
-    {
-        $this->body = $body;
-        $this->headers = $headers;
+    ) {
+        $this->body       = $body;
+        $this->headers    = $headers;
         $this->statusCode = $statusCode;
-        $this->error = $error;
-        $this->info = $info;
-        $this->time = $time;
+        $this->error      = $error;
+        $this->info       = $info;
+        $this->time       = $time;
     }
 
     /**

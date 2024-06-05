@@ -9,7 +9,7 @@ class GeneralResponse extends BaseResponse
 
     /**
      * @param array|integer|BaseResponse $data
-     * @param ApiResponse $response
+     * @param ApiResponse                $response
      */
     public function __construct(int|array|BaseResponse $data, ApiResponse $response)
     {
@@ -19,7 +19,7 @@ class GeneralResponse extends BaseResponse
     /**
      * @return int|array
      */
-    public  function getData(): int|array
+    public function getData(): int|array
     {
         return $this->data;
     }

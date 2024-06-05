@@ -10,7 +10,7 @@ class ApiKeyResponse extends BaseResponse
 
     /**
      * @param ApiKey|ApiKey[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse     $response
      */
     public function __construct(ApiKey|array $data, ApiResponse $response)
     {
@@ -20,7 +20,7 @@ class ApiKeyResponse extends BaseResponse
     /**
      * @return ApiKey|ApiKey[]
      */
-    public  function getData(): ApiKey|array
+    public function getData(): ApiKey|array
     {
         return $this->data;
     }

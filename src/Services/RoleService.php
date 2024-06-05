@@ -9,9 +9,10 @@ class RoleService extends PartnerApiService
 {
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $roleName
-     * @param array $permissions
+     * @param array  $permissions
+     *
      * @return GeneralResponse
      */
     public function createCustomRole(int $newsletterAccountId, string $roleName, array $permissions): GeneralResponse
@@ -21,8 +22,8 @@ class RoleService extends PartnerApiService
             'settings/roles',
             ['nl_account_id' => $newsletterAccountId],
             [
-                'name' => $roleName,
-                'permissions' => $permissions
+                'name'        => $roleName,
+                'permissions' => $permissions,
             ],
             $this->key
         );
@@ -31,8 +32,9 @@ class RoleService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $roleName
+     *
      * @return GeneralResponse
      */
     public function deleteCustomRole(int $newsletterAccountId, string $roleName): GeneralResponse

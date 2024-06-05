@@ -15,6 +15,7 @@ class ProductService extends PartnerApiService
 
     /**
      * @param int $newsletterAccountId
+     *
      * @return ProductResponse
      * @throws MappingError
      */
@@ -31,10 +32,11 @@ class ProductService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
-     * @param string $productName
-     * @param bool $active
+     * @param int         $newsletterAccountId
+     * @param string      $productName
+     * @param bool        $active
      * @param string|null $timeRestricted
+     *
      * @return GeneralResponse
      */
     public function setStatusOfProduct(
@@ -42,15 +44,14 @@ class ProductService extends PartnerApiService
         string  $productName,
         bool    $active,
         ?string $timeRestricted = null
-    ): GeneralResponse
-    {
+    ): GeneralResponse {
         $response = Request::send(
             'PUT',
             'settings/products/' . $productName,
             ['nl_account_id' => $newsletterAccountId],
             [
-                'active' => $active,
-                'timeRestricted' => $timeRestricted
+                'active'         => $active,
+                'timeRestricted' => $timeRestricted,
             ],
             $this->key
         );
@@ -59,16 +60,16 @@ class ProductService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $productName
+     *
      * @return ProductLogResponse
      * @throws MappingError
      */
     public function getProductStatusLogs(
         int    $newsletterAccountId,
         string $productName,
-    ): ProductLogResponse
-    {
+    ): ProductLogResponse {
         $response = $this->getList(
             'settings/products/' . $productName . '/logs',
             ProductLog::class,
@@ -80,15 +81,15 @@ class ProductService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $base64encodedFile
+     *
      * @return GeneralResponse
      */
     public function uploadTemplate(
         int    $newsletterAccountId,
         string $base64encodedFile
-    ): GeneralResponse
-    {
+    ): GeneralResponse {
         $response = Request::send(
             'POST',
             'media/templates/',

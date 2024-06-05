@@ -10,7 +10,7 @@ class WebhookResponse extends BaseResponse
 
     /**
      * @param Webhook|Webhook[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse       $response
      */
     public function __construct(Webhook|array $data, ApiResponse $response)
     {
@@ -20,7 +20,7 @@ class WebhookResponse extends BaseResponse
     /**
      * @return Webhook|Webhook[]
      */
-    public  function getData(): Webhook|array
+    public function getData(): Webhook|array
     {
         return $this->data;
     }

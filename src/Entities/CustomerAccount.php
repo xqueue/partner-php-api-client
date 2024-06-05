@@ -2,17 +2,14 @@
 
 namespace Xqueue\MaileonPartnerApiClient\Entities;
 
-use CuyZ\Valinor\Mapper\MappingError;
-use Xqueue\MaileonPartnerApiClient\Http\ApiResponse;
-use Xqueue\MaileonPartnerApiClient\Http\Responses\BaseResponse;
 use Xqueue\MaileonPartnerApiClient\Traits\MappingTrait;
 
 /**
- * @property int $id
+ * @property int    $id
  * @property string $name
  * @property string $type
  * @property string $status
- * @property int $distributorAccountId
+ * @property int    $distributorAccountId
  * @property string $distributorAccountName
  * @property string $createdTime
  * @property string $createdUser
@@ -24,21 +21,21 @@ class CustomerAccount
 
     public const KEY = 'customerAccounts';
 
-    public int $id;
+    public int    $id;
     public string $name;
     public string $type;
     public string $status;
-    public int $distributorAccountId;
+    public int    $distributorAccountId;
     public string $distributorAccountName;
     public string $createdTime;
     public string $createdUser;
 
     /**
-     * @param int $id
+     * @param int    $id
      * @param string $name
      * @param string $type
      * @param string $status
-     * @param int $distributorAccountId
+     * @param int    $distributorAccountId
      * @param string $distributorAccountName
      * @param string $createdTime
      * @param string $createdUser
@@ -52,15 +49,14 @@ class CustomerAccount
         string $distributorAccountName,
         string $createdTime,
         string $createdUser
-    )
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->type = $type;
-        $this->status = $status;
-        $this->distributorAccountId = $distributorAccountId;
+    ) {
+        $this->id                     = $id;
+        $this->name                   = $name;
+        $this->type                   = $type;
+        $this->status                 = $status;
+        $this->distributorAccountId   = $distributorAccountId;
         $this->distributorAccountName = $distributorAccountName;
-        $this->createdTime = $createdTime;
-        $this->createdUser = $createdUser;
+        $this->createdTime            = $createdTime;
+        $this->createdUser            = $createdUser;
     }
 }

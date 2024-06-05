@@ -13,6 +13,7 @@ class UserService extends PartnerApiService
 
     /**
      * @param int $newsletterAccountId
+     *
      * @return UserAccountResponse
      * @throws MappingError
      */
@@ -29,12 +30,13 @@ class UserService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
-     * @param string $email
-     * @param string $firstName
-     * @param string $lastName
+     * @param int         $newsletterAccountId
+     * @param string      $email
+     * @param string      $firstName
+     * @param string      $lastName
      * @param string|null $locale
      * @param string|null $theme
+     *
      * @return GeneralResponse
      */
     public function createUserAccount(
@@ -44,16 +46,15 @@ class UserService extends PartnerApiService
         string  $lastName,
         ?string $locale = null,
         ?string $theme = null,
-    ): GeneralResponse
-    {
+    ): GeneralResponse {
         $response = $this->create(
             'settings/users',
             [
-                'email' => $email,
+                'email'      => $email,
                 'first_name' => $firstName,
-                'last_name' => $lastName,
-                'locale' => $locale,
-                'theme' => $theme,
+                'last_name'  => $lastName,
+                'locale'     => $locale,
+                'theme'      => $theme,
             ],
             ['nl_account_id' => $newsletterAccountId]
         );
@@ -62,8 +63,9 @@ class UserService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $email
+     *
      * @return GeneralResponse
      */
     public function deleteUserAccount(int $newsletterAccountId, string $email): GeneralResponse
@@ -80,9 +82,10 @@ class UserService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $email
      * @param string $roleName
+     *
      * @return GeneralResponse
      */
     public function assignRoleToUser(int $newsletterAccountId, string $email, string $roleName): GeneralResponse
@@ -92,7 +95,7 @@ class UserService extends PartnerApiService
             'settings/users/' . $email . '/roles',
             [
                 'nl_account_id' => $newsletterAccountId,
-                'roleName' => $roleName
+                'roleName'      => $roleName,
             ],
             [],
             $this->key
@@ -102,9 +105,10 @@ class UserService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $email
      * @param string $roleName
+     *
      * @return GeneralResponse
      */
     public function deleteRoleFromUser(int $newsletterAccountId, string $email, string $roleName): GeneralResponse
@@ -114,7 +118,7 @@ class UserService extends PartnerApiService
             'settings/users/' . $email . '/roles',
             [
                 'nl_account_id' => $newsletterAccountId,
-                'roleName' => $roleName
+                'roleName'      => $roleName,
             ],
             [],
             $this->key

@@ -10,7 +10,7 @@ class MailingDomainResponse extends BaseResponse
 
     /**
      * @param MailingDomain|MailingDomain[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse                   $response
      */
     public function __construct(MailingDomain|array $data, ApiResponse $response)
     {
@@ -20,7 +20,7 @@ class MailingDomainResponse extends BaseResponse
     /**
      * @return MailingDomain|MailingDomain[]
      */
-    public  function getData(): MailingDomain|array
+    public function getData(): MailingDomain|array
     {
         return $this->data;
     }

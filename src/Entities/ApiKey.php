@@ -13,7 +13,7 @@ class ApiKey
      */
     public function __construct(string $apiKey, string $expiration)
     {
-        $this->apiKey = $apiKey;
+        $this->apiKey     = $apiKey;
         $this->expiration = $expiration;
     }
 }

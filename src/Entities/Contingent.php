@@ -5,28 +5,28 @@ namespace Xqueue\MaileonPartnerApiClient\Entities;
 class Contingent
 {
 
-    public int $id;
+    public int    $id;
     public string $author;
     public string $created;
     public string $name;
     public string $expiryDate;
-    public int $contingentValue;
-    public int $availableValue;
-    public int $newsletterAccountId;
-    public int $usedValue;
+    public int    $contingentValue;
+    public int    $availableValue;
+    public int    $newsletterAccountId;
+    public int    $usedValue;
     public string $updated;
     public string $status;
 
     /**
-     * @param int $id
+     * @param int    $id
      * @param string $author
      * @param string $created
      * @param string $name
      * @param string $expiryDate
-     * @param int $contingentValue
-     * @param int $availableValue
-     * @param int $newsletterAccountId
-     * @param int $usedValue
+     * @param int    $contingentValue
+     * @param int    $availableValue
+     * @param int    $newsletterAccountId
+     * @param int    $usedValue
      * @param string $updated
      * @param string $status
      */
@@ -42,19 +42,18 @@ class Contingent
         int    $usedValue,
         string $updated,
         string $status,
-    )
-    {
-        $this->id = $id;
-        $this->author = $author;
-        $this->created = $created;
-        $this->name = $name;
-        $this->expiryDate = $expiryDate;
-        $this->contingentValue = $contingentValue;
-        $this->availableValue = $availableValue;
+    ) {
+        $this->id                  = $id;
+        $this->author              = $author;
+        $this->created             = $created;
+        $this->name                = $name;
+        $this->expiryDate          = $expiryDate;
+        $this->contingentValue     = $contingentValue;
+        $this->availableValue      = $availableValue;
         $this->newsletterAccountId = $newsletterAccountId;
-        $this->usedValue = $usedValue;
-        $this->updated = $updated;
-        $this->status = $status;
+        $this->usedValue           = $usedValue;
+        $this->updated             = $updated;
+        $this->status              = $status;
     }
 
 }

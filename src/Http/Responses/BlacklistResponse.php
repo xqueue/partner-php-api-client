@@ -10,7 +10,7 @@ class BlacklistResponse extends BaseResponse
 
     /**
      * @param Blacklist|Blacklist[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse           $response
      */
     public function __construct(Blacklist|array $data, ApiResponse $response)
     {
@@ -20,7 +20,7 @@ class BlacklistResponse extends BaseResponse
     /**
      * @return Blacklist|Blacklist[]
      */
-    public  function getData(): Blacklist|array
+    public function getData(): Blacklist|array
     {
         return $this->data;
     }

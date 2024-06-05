@@ -10,7 +10,7 @@ class ReportCheckResponse extends BaseResponse
 
     /**
      * @param ReportCheck|ReportCheck[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse               $response
      */
     public function __construct(ReportCheck|array $data, ApiResponse $response)
     {
@@ -20,7 +20,7 @@ class ReportCheckResponse extends BaseResponse
     /**
      * @return ReportCheck|ReportCheck[]
      */
-    public  function getData(): ReportCheck|array
+    public function getData(): ReportCheck|array
     {
         return $this->data;
     }

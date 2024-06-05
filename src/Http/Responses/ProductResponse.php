@@ -10,7 +10,7 @@ class ProductResponse extends BaseResponse
 
     /**
      * @param Product|Product[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse       $response
      */
     public function __construct(Product|array $data, ApiResponse $response)
     {
@@ -20,7 +20,7 @@ class ProductResponse extends BaseResponse
     /**
      * @return Product|Product[]
      */
-    public  function getData(): Product|array
+    public function getData(): Product|array
     {
         return $this->data;
     }

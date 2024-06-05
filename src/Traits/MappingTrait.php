@@ -11,7 +11,8 @@ trait MappingTrait
 
     /**
      * @param string $objectName
-     * @param array $elements
+     * @param array  $elements
+     *
      * @return array
      * @throws MappingError
      */
@@ -30,7 +31,8 @@ trait MappingTrait
 
     /**
      * @param string $objectName
-     * @param array $data
+     * @param array  $data
+     *
      * @return object
      * @throws MappingError
      */

@@ -13,6 +13,7 @@ class WebhookService extends PartnerApiService
 
     /**
      * @param int $newsletterAccountId
+     *
      * @return WebhookResponse
      * @throws MappingError
      */
@@ -29,11 +30,12 @@ class WebhookService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $event
-     * @param int $id
+     * @param int    $id
      * @param string $url
-     * @param array $urlParams
+     * @param array  $urlParams
+     *
      * @return GeneralResponse
      */
     public function createWebhook(
@@ -42,15 +44,14 @@ class WebhookService extends PartnerApiService
         int    $id,
         string $url,
         array  $urlParams
-    ): GeneralResponse
-    {
+    ): GeneralResponse {
         $response = $this->create(
             'settings/webhooks',
             [
-                'id' => $id,
-                'event' => $event,
-                'url' => $url,
-                'urlParams' => $urlParams
+                'id'        => $id,
+                'event'     => $event,
+                'url'       => $url,
+                'urlParams' => $urlParams,
             ],
             ['nl_account_id' => $newsletterAccountId]
         );
@@ -61,6 +62,7 @@ class WebhookService extends PartnerApiService
     /**
      * @param int $newsletterAccountId
      * @param int $webhookId
+     *
      * @return WebhookResponse
      * @throws MappingError
      */
@@ -79,6 +81,7 @@ class WebhookService extends PartnerApiService
     /**
      * @param int $newsletterAccountId
      * @param int $webhookId
+     *
      * @return GeneralResponse
      */
     public function deleteWebhook(int $newsletterAccountId, int $webhookId): GeneralResponse

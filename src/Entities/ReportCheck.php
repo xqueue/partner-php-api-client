@@ -5,24 +5,24 @@ namespace Xqueue\MaileonPartnerApiClient\Entities;
 class ReportCheck
 {
     public const KEY = 'checks';
-    public int $distributorAccountId;
+    public int    $distributorAccountId;
     public string $distributorAccountName;
-    public int $customerAccountId;
+    public int    $customerAccountId;
     public string $customerAccountName;
-    public int $newsletterAccountId;
+    public int    $newsletterAccountId;
     public string $newsletterAccountName;
-    public int $mailingId;
+    public int    $mailingId;
     public string $nameOfCheck;
     public string $created;
 
     /**
-     * @param int $distributorAccountId
+     * @param int    $distributorAccountId
      * @param string $distributorAccountName
-     * @param int $customerAccountId
+     * @param int    $customerAccountId
      * @param string $customerAccountName
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $newsletterAccountName
-     * @param int $mailingId
+     * @param int    $mailingId
      * @param string $nameOfCheck
      * @param string $created
      */
@@ -36,17 +36,16 @@ class ReportCheck
         int    $mailingId,
         string $nameOfCheck,
         string $created
-    )
-    {
-        $this->distributorAccountId = $distributorAccountId;
+    ) {
+        $this->distributorAccountId   = $distributorAccountId;
         $this->distributorAccountName = $distributorAccountName;
-        $this->customerAccountId = $customerAccountId;
-        $this->customerAccountName = $customerAccountName;
-        $this->newsletterAccountId = $newsletterAccountId;
-        $this->newsletterAccountName = $newsletterAccountName;
-        $this->mailingId = $mailingId;
-        $this->nameOfCheck = $nameOfCheck;
-        $this->created = $created;
+        $this->customerAccountId      = $customerAccountId;
+        $this->customerAccountName    = $customerAccountName;
+        $this->newsletterAccountId    = $newsletterAccountId;
+        $this->newsletterAccountName  = $newsletterAccountName;
+        $this->mailingId              = $mailingId;
+        $this->nameOfCheck            = $nameOfCheck;
+        $this->created                = $created;
     }
 
 }

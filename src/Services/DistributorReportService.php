@@ -12,13 +12,14 @@ class DistributorReportService extends PartnerApiService
 {
 
     /**
-     * @param string $from
-     * @param string $to
-     * @param int $pageIndex
-     * @param int $pageSize
-     * @param int $newsletterAccountId
-     * @param int $customerAccountId
+     * @param string      $from
+     * @param string      $to
+     * @param int         $pageIndex
+     * @param int         $pageSize
+     * @param int         $newsletterAccountId
+     * @param int         $customerAccountId
      * @param string|null $accountType
+     *
      * @return VolumeReportResponse
      * @throws MappingError
      */
@@ -30,20 +31,19 @@ class DistributorReportService extends PartnerApiService
         int     $newsletterAccountId,
         int     $customerAccountId,
         ?string $accountType = null
-    ): VolumeReportResponse
-    {
+    ): VolumeReportResponse {
         $response = $this->getList(
             'report/accounts_volume',
             VolumeReport::class,
             null,
             [
-                'from' => $from,
-                'to' => $to,
-                'page_size' => $pageSize,
-                'page_index' => $pageIndex,
-                'customer_account_id' => $customerAccountId,
+                'from'                  => $from,
+                'to'                    => $to,
+                'page_size'             => $pageSize,
+                'page_index'            => $pageIndex,
+                'customer_account_id'   => $customerAccountId,
                 'newsletter_account_id' => $newsletterAccountId,
-                'account_type' => $accountType
+                'account_type'          => $accountType,
             ]
         );
 
@@ -53,10 +53,11 @@ class DistributorReportService extends PartnerApiService
     /**
      * @param string $from
      * @param string $to
-     * @param int $pageIndex
-     * @param int $pageSize
-     * @param int $newsletterAccountId
-     * @param int $processId
+     * @param int    $pageIndex
+     * @param int    $pageSize
+     * @param int    $newsletterAccountId
+     * @param int    $processId
+     *
      * @return SMSReportResponse
      * @throws MappingError
      */
@@ -67,19 +68,18 @@ class DistributorReportService extends PartnerApiService
         int    $pageSize,
         int    $newsletterAccountId,
         int    $processId
-    ): SMSReportResponse
-    {
+    ): SMSReportResponse {
         $response = $this->getList(
             'report/sms',
             SMSReport::class,
             null,
             [
-                'from' => $from,
-                'to' => $to,
-                'page_size' => $pageSize,
-                'page_index' => $pageIndex,
+                'from'                  => $from,
+                'to'                    => $to,
+                'page_size'             => $pageSize,
+                'page_index'            => $pageIndex,
                 'newsletter_account_id' => $newsletterAccountId,
-                'process_id' => $processId,
+                'process_id'            => $processId,
             ]
         );
 

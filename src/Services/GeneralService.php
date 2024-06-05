@@ -3,7 +3,6 @@
 namespace Xqueue\MaileonPartnerApiClient\Services;
 
 use Xqueue\MaileonPartnerApiClient\Http\Request;
-use Xqueue\MaileonPartnerApiClient\Http\ApiResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
 
 class GeneralService extends PartnerApiService
@@ -21,16 +20,17 @@ class GeneralService extends PartnerApiService
 
     /**
      * @param string $domain
+     *
      * @return GeneralResponse
      */
     public function validateDomain(string $domain): GeneralResponse
     {
         $response = Request::send('GET', 'domains/validate', ['domain' => urlencode($domain)], [], $this->key);
 
-        if (!$response->isSuccess()) {
+        if (! $response->isSuccess()) {
             $data = [
                 'isSuccess' => false,
-                'error' => $response->body['error']
+                'error'     => $response->body['error'],
             ];
         } else {
             $data = ['isSuccess' => true];

@@ -14,6 +14,7 @@ class BlacklistService extends PartnerApiService
     /**
      * @param int $pageIndex
      * @param int $pageSize
+     *
      * @return BlacklistResponse
      * @throws MappingError
      */
@@ -30,9 +31,10 @@ class BlacklistService extends PartnerApiService
     }
 
     /**
-     * @param string $name
-     * @param string $status
+     * @param string      $name
+     * @param string      $status
      * @param string|null $type
+     *
      * @return BlacklistResponse
      * @throws MappingError
      */
@@ -42,9 +44,9 @@ class BlacklistService extends PartnerApiService
             'blacklists',
             [],
             [
-                'name' => $name,
+                'name'   => $name,
                 'status' => $status,
-                'type' => $type
+                'type'   => $type,
             ],
         );
 
@@ -55,6 +57,7 @@ class BlacklistService extends PartnerApiService
 
     /**
      * @param int $id
+     *
      * @return BlacklistResponse
      * @throws MappingError
      */
@@ -70,10 +73,11 @@ class BlacklistService extends PartnerApiService
     }
 
     /**
-     * @param int $id
-     * @param string $name
-     * @param string $status
+     * @param int         $id
+     * @param string      $name
+     * @param string      $status
      * @param string|null $type
+     *
      * @return BlacklistResponse
      * @throws MappingError
      */
@@ -83,9 +87,9 @@ class BlacklistService extends PartnerApiService
             'PUT',
             'blacklists/' . $id,
             [
-                'name' => $name,
+                'name'   => $name,
                 'status' => $status,
-                'type' => $type
+                'type'   => $type,
             ],
             [],
             $this->key
@@ -98,6 +102,7 @@ class BlacklistService extends PartnerApiService
 
     /**
      * @param int $id
+     *
      * @return GeneralResponse
      */
     public function deleteBlacklist(int $id): GeneralResponse
@@ -109,6 +114,7 @@ class BlacklistService extends PartnerApiService
 
     /**
      * @param int $id
+     *
      * @return GeneralResponse
      */
     public function getAccountsOfBlacklist(int $id): GeneralResponse
@@ -119,8 +125,9 @@ class BlacklistService extends PartnerApiService
     }
 
     /**
-     * @param int $id
+     * @param int   $id
      * @param array $newsletterAccountIds
+     *
      * @return GeneralResponse
      */
     public function addAccountsToBlacklist(int $id, array $newsletterAccountIds): GeneralResponse
@@ -140,6 +147,7 @@ class BlacklistService extends PartnerApiService
      * @param int $id
      * @param int $pageIndex
      * @param int $pageSize
+     *
      * @return GeneralResponse
      */
     public function getPatternsOfBlacklist(int $id, int $pageIndex, int $pageSize): GeneralResponse
@@ -156,9 +164,10 @@ class BlacklistService extends PartnerApiService
     }
 
     /**
-     * @param int $id
+     * @param int    $id
      * @param string $uploadName
-     * @param array $patterns
+     * @param array  $patterns
+     *
      * @return GeneralResponse
      */
     public function updatePatternsOfBlacklist(int $id, string $uploadName, array $patterns): GeneralResponse

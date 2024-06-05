@@ -5,12 +5,12 @@ namespace Xqueue\MaileonPartnerApiClient\Entities;
 class AccountStatus
 {
 
-    public int $id;
+    public int    $id;
     public string $name;
     public string $new_status;
 
     /**
-     * @param int $id
+     * @param int    $id
      * @param string $name
      * @param string $new_status
      */
@@ -18,10 +18,9 @@ class AccountStatus
         int    $id,
         string $name,
         string $new_status,
-    )
-    {
-        $this->id = $id;
-        $this->name = $name;
+    ) {
+        $this->id         = $id;
+        $this->name       = $name;
         $this->new_status = $new_status;
     }
 }

@@ -12,6 +12,7 @@ class ContingentService extends PartnerApiService
 {
     /**
      * @param int $newsletterAccountId
+     *
      * @return GeneralResponse
      */
     public function getPrepaidStatus(int $newsletterAccountId): GeneralResponse
@@ -28,8 +29,9 @@ class ContingentService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int  $newsletterAccountId
      * @param bool $active
+     *
      * @return GeneralResponse
      */
     public function setPrepaidStatus(int $newsletterAccountId, bool $active): GeneralResponse
@@ -46,8 +48,9 @@ class ContingentService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int         $newsletterAccountId
      * @param null|string $status
+     *
      * @return ContingentResponse
      * @throws MappingError
      */
@@ -59,7 +62,7 @@ class ContingentService extends PartnerApiService
             null,
             [
                 'nl_account_id' => $newsletterAccountId,
-                'status' => $status
+                'status'        => $status,
             ]
         );
 
@@ -67,10 +70,11 @@ class ContingentService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $expiryDate
-     * @param int $contingentValue
+     * @param int    $contingentValue
      * @param string $name
+     *
      * @return ContingentResponse
      * @throws MappingError
      */
@@ -79,16 +83,15 @@ class ContingentService extends PartnerApiService
         string $expiryDate,
         int    $contingentValue,
         string $name
-    ): ContingentResponse
-    {
+    ): ContingentResponse {
         $response = Request::send(
             'PUT',
             'settings/prepaids/contingents',
             ['nl_account_id' => $newsletterAccountId],
             [
-                'expiryDate' => $expiryDate,
+                'expiryDate'      => $expiryDate,
                 'contingentValue' => $contingentValue,
-                'name' => $name
+                'name'            => $name,
             ],
             $this->key
         );
@@ -99,8 +102,9 @@ class ContingentService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $contingentId
+     *
      * @return ContingentResponse
      * @throws MappingError
      */
@@ -117,11 +121,12 @@ class ContingentService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $contingentId
      * @param string $expiryDate
-     * @param int $contingentValue
+     * @param int    $contingentValue
      * @param string $name
+     *
      * @return ContingentResponse
      * @throws MappingError
      */
@@ -131,16 +136,15 @@ class ContingentService extends PartnerApiService
         string $expiryDate,
         string $name,
         int    $contingentValue,
-    ): ContingentResponse
-    {
+    ): ContingentResponse {
         $response = Request::send(
             'POST',
             'settings/prepaids/contingents/contingent/' . $contingentId,
             ['nl_account_id' => $newsletterAccountId],
             [
-                'expiryDate' => $expiryDate,
+                'expiryDate'      => $expiryDate,
                 'contingentValue' => $contingentValue,
-                'name' => $name
+                'name'            => $name,
             ],
             $this->key
         );
@@ -151,15 +155,15 @@ class ContingentService extends PartnerApiService
     }
 
     /**
-     * @param int $newsletterAccountId
+     * @param int    $newsletterAccountId
      * @param string $contingentId
+     *
      * @return GeneralResponse
      */
     public function deleteContingent(
         int    $newsletterAccountId,
         string $contingentId,
-    ): GeneralResponse
-    {
+    ): GeneralResponse {
         $response = Request::send(
             'DELETE',
             'settings/prepaids/contingents/contingent/' . $contingentId,

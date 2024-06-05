@@ -9,7 +9,7 @@ class JobResponse extends BaseResponse
 {
 
     /**
-     * @param Job|Job[] $data
+     * @param Job|Job[]   $data
      * @param ApiResponse $response
      */
     public function __construct(Job|array $data, ApiResponse $response)
@@ -20,7 +20,7 @@ class JobResponse extends BaseResponse
     /**
      * @return Job|Job[]
      */
-    public  function getData(): Job|array
+    public function getData(): Job|array
     {
         return $this->data;
     }

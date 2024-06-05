@@ -10,7 +10,7 @@ class UserAccount
     public string $lastName;
     public string $theme;
     public string $locale;
-    public array $roles;
+    public array  $roles;
     public string $created;
 
     /**
@@ -28,16 +28,15 @@ class UserAccount
         string $lastName,
         string $theme,
         string $locale,
-        array $roles,
+        array  $roles,
         string $created
-    )
-    {
-        $this->email = $email;
+    ) {
+        $this->email     = $email;
         $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->theme = $theme;
-        $this->locale = $locale;
-        $this->roles = $roles;
-        $this->created = $created;
+        $this->lastName  = $lastName;
+        $this->theme     = $theme;
+        $this->locale    = $locale;
+        $this->roles     = $roles;
+        $this->created   = $created;
     }
 }

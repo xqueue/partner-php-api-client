@@ -10,7 +10,7 @@ class ContingentResponse extends BaseResponse
 
     /**
      * @param Contingent|Contingent[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse             $response
      */
     public function __construct(Contingent|array $data, ApiResponse $response)
     {
@@ -20,7 +20,7 @@ class ContingentResponse extends BaseResponse
     /**
      * @return Contingent|Contingent[]
      */
-    public  function getData(): Contingent|array
+    public function getData(): Contingent|array
     {
         return $this->data;
     }

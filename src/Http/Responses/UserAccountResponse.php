@@ -10,7 +10,7 @@ class UserAccountResponse extends BaseResponse
 
     /**
      * @param UserAccount|UserAccount[] $data
-     * @param ApiResponse $response
+     * @param ApiResponse               $response
      */
     public function __construct(UserAccount|array $data, ApiResponse $response)
     {
@@ -20,7 +20,7 @@ class UserAccountResponse extends BaseResponse
     /**
      * @return UserAccount|UserAccount[]
      */
-    public  function getData(): UserAccount|array
+    public function getData(): UserAccount|array
     {
         return $this->data;
     }
