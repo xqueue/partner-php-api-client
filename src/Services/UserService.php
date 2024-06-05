@@ -4,7 +4,6 @@ namespace Xqueue\MaileonPartnerApiClient\Services;
 
 use CuyZ\Valinor\Mapper\MappingError;
 use Xqueue\MaileonPartnerApiClient\Entities\UserAccount;
-use Xqueue\MaileonPartnerApiClient\Http\Request;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\UserAccountResponse;
 
@@ -70,12 +69,10 @@ class UserService extends PartnerApiService
      */
     public function deleteUserAccount(int $newsletterAccountId, string $email): GeneralResponse
     {
-        $response = Request::send(
+        $response = $this->sendRequest(
             'DELETE',
             'settings/users/' . $email,
-            ['nl_account_id' => $newsletterAccountId],
-            [],
-            $this->key
+            ['nl_account_id' => $newsletterAccountId]
         );
 
         return new GeneralResponse($response->body, $response);
@@ -90,15 +87,13 @@ class UserService extends PartnerApiService
      */
     public function assignRoleToUser(int $newsletterAccountId, string $email, string $roleName): GeneralResponse
     {
-        $response = Request::send(
+        $response = $this->sendRequest(
             'PUT',
             'settings/users/' . $email . '/roles',
             [
                 'nl_account_id' => $newsletterAccountId,
                 'roleName'      => $roleName,
-            ],
-            [],
-            $this->key
+            ]
         );
 
         return new GeneralResponse($response->body, $response);
@@ -113,15 +108,13 @@ class UserService extends PartnerApiService
      */
     public function deleteRoleFromUser(int $newsletterAccountId, string $email, string $roleName): GeneralResponse
     {
-        $response = Request::send(
+        $response = $this->sendRequest(
             'DELETE',
             'settings/users/' . $email . '/roles',
             [
                 'nl_account_id' => $newsletterAccountId,
                 'roleName'      => $roleName,
-            ],
-            [],
-            $this->key
+            ]
         );
 
         return new GeneralResponse($response->body, $response);

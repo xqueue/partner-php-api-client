@@ -17,7 +17,7 @@ class WebhookServiceTest extends TestCase
     public function __construct(string $name)
     {
         parent::__construct($name);
-        $this->webhookService = new WebhookService(getenv('MAILEON_PARTNER_API_KEY'));
+        $this->webhookService = new WebhookService(['API_KEY' => getenv('MAILEON_PARTNER_API_KEY')]);
         $this->nlAccountId = $this->getOneNewsLetterAccount()->id;
     }
 

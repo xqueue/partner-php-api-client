@@ -4,7 +4,6 @@ namespace Xqueue\MaileonPartnerApiClient\Services;
 
 use CuyZ\Valinor\Mapper\MappingError;
 use Xqueue\MaileonPartnerApiClient\Entities\Contingent;
-use Xqueue\MaileonPartnerApiClient\Http\Request;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\ContingentResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
 
@@ -17,12 +16,10 @@ class ContingentService extends PartnerApiService
      */
     public function getPrepaidStatus(int $newsletterAccountId): GeneralResponse
     {
-        $response = Request::send(
+        $response =  $this->sendRequest(
             'GET',
             'settings/prepaids/status',
-            ['nl_account_id' => $newsletterAccountId],
-            [],
-            $this->key
+            ['nl_account_id' => $newsletterAccountId]
         );
 
         return new GeneralResponse($response->body, $response);
@@ -36,12 +33,11 @@ class ContingentService extends PartnerApiService
      */
     public function setPrepaidStatus(int $newsletterAccountId, bool $active): GeneralResponse
     {
-        $response = Request::send(
+        $response =  $this->sendRequest(
             'POST',
             'settings/prepaids/status',
             ['nl_account_id' => $newsletterAccountId],
-            ['active' => $active],
-            $this->key
+            ['active' => $active]
         );
 
         return new GeneralResponse($response->body, $response);
@@ -84,7 +80,7 @@ class ContingentService extends PartnerApiService
         int    $contingentValue,
         string $name
     ): ContingentResponse {
-        $response = Request::send(
+        $response =  $this->sendRequest(
             'PUT',
             'settings/prepaids/contingents',
             ['nl_account_id' => $newsletterAccountId],
@@ -92,8 +88,7 @@ class ContingentService extends PartnerApiService
                 'expiryDate'      => $expiryDate,
                 'contingentValue' => $contingentValue,
                 'name'            => $name,
-            ],
-            $this->key
+            ]
         );
 
         $data = $this->mapObject(Contingent::class, $response->body);
@@ -137,7 +132,7 @@ class ContingentService extends PartnerApiService
         string $name,
         int    $contingentValue,
     ): ContingentResponse {
-        $response = Request::send(
+        $response =  $this->sendRequest(
             'POST',
             'settings/prepaids/contingents/contingent/' . $contingentId,
             ['nl_account_id' => $newsletterAccountId],
@@ -145,8 +140,7 @@ class ContingentService extends PartnerApiService
                 'expiryDate'      => $expiryDate,
                 'contingentValue' => $contingentValue,
                 'name'            => $name,
-            ],
-            $this->key
+            ]
         );
 
         $data = $this->mapObject(Contingent::class, $response->body);
@@ -164,12 +158,10 @@ class ContingentService extends PartnerApiService
         int    $newsletterAccountId,
         string $contingentId,
     ): GeneralResponse {
-        $response = Request::send(
+        $response =  $this->sendRequest(
             'DELETE',
             'settings/prepaids/contingents/contingent/' . $contingentId,
-            ['nl_account_id' => $newsletterAccountId],
-            [],
-            $this->key
+            ['nl_account_id' => $newsletterAccountId]
         );
 
         return new GeneralResponse($response->body, $response);

@@ -17,7 +17,7 @@ class ProductServiceTest extends TestCase
     public function __construct(string $name)
     {
         parent::__construct($name);
-        $this->productService = new ProductService(getenv('MAILEON_PARTNER_API_KEY'));
+        $this->productService = new ProductService(['API_KEY' => getenv('MAILEON_PARTNER_API_KEY')]);
         $this->nlAccountId    = $this->getOneNewsLetterAccount()->id;
     }
 

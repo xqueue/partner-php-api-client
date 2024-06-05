@@ -15,7 +15,7 @@ class ReportServiceTest extends TestCase
     public function __construct(string $name)
     {
         parent::__construct($name);
-        $this->reportService = new ReportService(getenv('MAILEON_PARTNER_API_KEY'));
+        $this->reportService = new ReportService(['API_KEY' => getenv('MAILEON_PARTNER_API_KEY')]);
     }
 
     public function test_get_report_checks_success(): void

@@ -2,12 +2,8 @@
 
 namespace Xqueue\MaileonPartnerApiClient\Tests\Integrations;
 
-use Illuminate\Support\Str;
-use Xqueue\MaileonPartnerApiClient\Entities\Contingent;
-use Xqueue\MaileonPartnerApiClient\Http\Responses\ContingentResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\JobResponse;
-use Xqueue\MaileonPartnerApiClient\Services\ContingentService;
 use Xqueue\MaileonPartnerApiClient\Services\JobService;
 use Xqueue\MaileonPartnerApiClient\Tests\TestCase;
 
@@ -20,7 +16,7 @@ class JobServiceTest extends TestCase
     public function __construct(string $name)
     {
         parent::__construct($name);
-        $this->jobService = new JobService(getenv('MAILEON_PARTNER_API_KEY'));
+        $this->jobService = new JobService(['API_KEY' => getenv('MAILEON_PARTNER_API_KEY')]);
         $this->nlAccountId = $this->getOneNewsLetterAccount()->id;
     }
 

@@ -4,7 +4,6 @@ namespace Xqueue\MaileonPartnerApiClient\Services;
 
 use CuyZ\Valinor\Mapper\MappingError;
 use Xqueue\MaileonPartnerApiClient\Entities\Webhook;
-use Xqueue\MaileonPartnerApiClient\Http\Request;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\WebhookResponse;
 
@@ -86,12 +85,10 @@ class WebhookService extends PartnerApiService
      */
     public function deleteWebhook(int $newsletterAccountId, int $webhookId): GeneralResponse
     {
-        $response = Request::send(
+        $response =  $this->sendRequest(
             'DELETE',
             'settings/webhooks/' . $webhookId,
-            ['nl_account_id' => $newsletterAccountId],
-            [],
-            $this->key
+            ['nl_account_id' => $newsletterAccountId]
         );
 
         return new GeneralResponse($response->body, $response);

@@ -17,7 +17,7 @@ class DistributorReportServiceTest extends TestCase
     public function __construct(string $name)
     {
         parent::__construct($name);
-        $this->reportService = new DistributorReportService(getenv('MAILEON_PARTNER_API_KEY'));
+        $this->reportService = new DistributorReportService(['API_KEY' => getenv('MAILEON_PARTNER_API_KEY')]);
         $this->nlAccountId = $this->getOneNewsLetterAccount()->id;
         $this->customerAccountId = $this->getOneCustomerAccount()->id;
     }

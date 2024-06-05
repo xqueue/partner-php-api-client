@@ -2,7 +2,6 @@
 
 namespace Xqueue\MaileonPartnerApiClient\Services;
 
-use Xqueue\MaileonPartnerApiClient\Http\Request;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
 
 class RoleService extends PartnerApiService
@@ -17,15 +16,14 @@ class RoleService extends PartnerApiService
      */
     public function createCustomRole(int $newsletterAccountId, string $roleName, array $permissions): GeneralResponse
     {
-        $response = Request::send(
+        $response = $this->sendRequest(
             'POST',
             'settings/roles',
             ['nl_account_id' => $newsletterAccountId],
             [
                 'name'        => $roleName,
                 'permissions' => $permissions,
-            ],
-            $this->key
+            ]
         );
 
         return new GeneralResponse($response->body, $response);
@@ -39,12 +37,10 @@ class RoleService extends PartnerApiService
      */
     public function deleteCustomRole(int $newsletterAccountId, string $roleName): GeneralResponse
     {
-        $response = Request::send(
+        $response = $this->sendRequest(
             'DELETE',
             'settings/roles/' . $roleName,
-            ['nl_account_id' => $newsletterAccountId],
-            [],
-            $this->key
+            ['nl_account_id' => $newsletterAccountId]
         );
 
         return new GeneralResponse($response->body, $response);

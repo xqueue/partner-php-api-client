@@ -14,7 +14,7 @@ class GeneralServiceTest extends TestCase
     public function __construct(string $name)
     {
         parent::__construct($name);
-        $this->generalService = new GeneralService(getenv('MAILEON_PARTNER_API_KEY'));
+        $this->generalService = new GeneralService(['API_KEY' => getenv('MAILEON_PARTNER_API_KEY')]);
     }
 
     public function test_get_locales_success(): void

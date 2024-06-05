@@ -3,6 +3,8 @@
 namespace Xqueue\MaileonPartnerApiClient\Services;
 
 use CuyZ\Valinor\Mapper\MappingError;
+use Exception;
+use Xqueue\MaileonPartnerApiClient\Http\ApiResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Request;
 use Xqueue\MaileonPartnerApiClient\Traits\MappingTrait;
 
@@ -10,14 +12,20 @@ abstract class PartnerApiService
 {
     use MappingTrait;
 
-    protected ?string $key;
+    protected array $config;
 
     /**
-     * @param string|null $key
+     * @param array $config
+     *
+     * @throws Exception
      */
-    public function __construct(?string $key = null)
+    public function __construct(array $config)
     {
-        $this->key = $key;
+        $this->config = [
+            'BASE_URI' => array_key_exists('BASE_URI', $config) ? $config['BASE_URI'] : 'https://api.maileon.com/partner/',
+            'API_KEY'  => array_key_exists('API_KEY', $config) ? $config['API_KEY'] : throw  new Exception('No API key set.'),
+            'TIMEOUT'  => array_key_exists('TIMEOUT', $config) ? $config['TIMEOUT'] : 60,
+        ];
     }
 
     /**
@@ -35,7 +43,7 @@ abstract class PartnerApiService
         ?string $responseKey = null,
         array   $queryParams = []
     ): array {
-        $response     = Request::send('GET', $url, $queryParams, [], $this->key);
+        $response     = $this->sendRequest('GET', $url, $queryParams);
         $responseBody = $response->body;
         $responseData = $responseKey ? $responseBody[$responseKey] : $responseBody;
 
@@ -58,7 +66,7 @@ abstract class PartnerApiService
      */
     protected function getOne(string $url, int|string $id, string $objectName, array $queryParams = []): array
     {
-        $response = Request::send('GET', $url . '/' . $id, $queryParams, [], $this->key);
+        $response = $this->sendRequest('GET', $url . '/' . $id, $queryParams);
         $data     = $this->mapObject($objectName, $response->body);
 
         return [
@@ -76,7 +84,7 @@ abstract class PartnerApiService
      */
     protected function getCount(string $url, string $responseKey, array $queryParams = []): array
     {
-        $response = Request::send('GET', $url, $queryParams, [], $this->key);
+        $response = $this->sendRequest('GET', $url, $queryParams);
 
         return [
             'data'     => $response->body[$responseKey],
@@ -93,11 +101,24 @@ abstract class PartnerApiService
      */
     protected function create(string $url, array $body, array $queryParams = []): array
     {
-        $response = Request::send('POST', $url, $queryParams, $body, $this->key);
+        $response = $this->sendRequest('POST', $url, $queryParams, $body);
 
         return [
             'data'     => $response->body,
             'response' => $response,
         ];
+    }
+
+    /**
+     * @param string $method
+     * @param string $url
+     * @param array  $queryParams
+     * @param array  $body
+     *
+     * @return ApiResponse
+     */
+    protected function sendRequest(string $method, string $url, array $queryParams = [], array $body = []): ApiResponse
+    {
+        return Request::send($method, $url, $queryParams, $body, $this->config);
     }
 }

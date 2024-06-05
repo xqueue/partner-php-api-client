@@ -5,7 +5,6 @@ namespace Xqueue\MaileonPartnerApiClient\Services;
 use CuyZ\Valinor\Mapper\MappingError;
 use Xqueue\MaileonPartnerApiClient\Entities\Product;
 use Xqueue\MaileonPartnerApiClient\Entities\ProductLog;
-use Xqueue\MaileonPartnerApiClient\Http\Request;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\ProductLogResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\ProductResponse;
@@ -45,15 +44,14 @@ class ProductService extends PartnerApiService
         bool    $active,
         ?string $timeRestricted = null
     ): GeneralResponse {
-        $response = Request::send(
+        $response = $this->sendRequest(
             'PUT',
             'settings/products/' . $productName,
             ['nl_account_id' => $newsletterAccountId],
             [
                 'active'         => $active,
                 'timeRestricted' => $timeRestricted,
-            ],
-            $this->key
+            ]
         );
 
         return new GeneralResponse($response->body, $response);
@@ -90,12 +88,11 @@ class ProductService extends PartnerApiService
         int    $newsletterAccountId,
         string $base64encodedFile
     ): GeneralResponse {
-        $response = Request::send(
+        $response = $this->sendRequest(
             'POST',
             'media/templates/',
             ['nl_account_id' => $newsletterAccountId],
-            ['content' => $base64encodedFile],
-            $this->key
+            ['content' => $base64encodedFile]
         );
 
         return new GeneralResponse($response->body, $response);

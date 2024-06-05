@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Str;
 use Xqueue\MaileonPartnerApiClient\Entities\Contingent;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\ContingentResponse;
@@ -17,7 +16,7 @@ class ContingentServiceTest extends TestCase
     public function __construct(string $name)
     {
         parent::__construct($name);
-        $this->contingentService = new ContingentService(getenv('MAILEON_PARTNER_API_KEY'));
+        $this->contingentService = new ContingentService(['API_KEY' => getenv('MAILEON_PARTNER_API_KEY')]);
         $this->nlAccountId = $this->getOneNewsLetterAccount()->id;
     }
 

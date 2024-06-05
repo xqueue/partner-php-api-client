@@ -4,27 +4,25 @@ namespace Xqueue\MaileonPartnerApiClient\Http;
 
 class Request
 {
-    public const BASE_URL = 'https://api-test.maileon.com/partner/';
-
     /**
-     * @param string      $method
-     * @param string      $url
-     * @param array       $params
-     * @param array       $body
-     * @param string|null $apiKey
+     * @param string $method
+     * @param string $url
+     * @param array  $params
+     * @param array  $body
+     * @param array  $config
      *
      * @return ApiResponse
      */
     public static function send(
-        string  $method,
-        string  $url,
-        array   $params = [],
-        array   $body = [],
-        ?string $apiKey = '',
+        string $method,
+        string $url,
+        array  $params = [],
+        array  $body = [],
+        array  $config = []
     ): ApiResponse {
-        $params['key'] = $apiKey;
+        $params['key'] = $config['API_KEY'];
         $queryString   = http_build_query($params);
-        $fullUrl       = self::BASE_URL . $url . ($queryString ? '?' . $queryString : '');
+        $fullUrl       = $config['BASE_URI'] . $url . ($queryString ? '?' . $queryString : '');
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
@@ -36,6 +34,8 @@ class Request
         curl_setopt($curl, CURLOPT_URL, $fullUrl);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HEADER, true);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $config['TIMEOUT']);
+        curl_setopt($curl, CURLOPT_TIMEOUT, $config['TIMEOUT']);
 
         $response   = curl_exec($curl);
         $error      = curl_error($curl);
