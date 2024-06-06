@@ -1,3 +1,7 @@
+[![Latest Stable Version](http://poser.pugx.org/xqueue/maileon-partner-api-client/v)](https://packagist.org/packages/xqueue/maileon-partner-api-client)
+[![License](http://poser.pugx.org/xqueue/maileon-partner-api-client/license)](https://packagist.org/packages/xqueue/maileon-partner-api-client)
+[![PHP Version Require](http://poser.pugx.org/xqueue/maileon-partner-api-client/require/php)](https://packagist.org/packages/xqueue/maileon-partner-api-client)
+
 # Maileon Partner API Client
 
 Provides an API client to connect to XQueue Maileon's Partner REST API and (de-)serializes all API functions and data for easier use in PHP projects.
