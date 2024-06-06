@@ -15,7 +15,7 @@ class RoleServiceTest extends TestCase
     public function __construct(string $name)
     {
         parent::__construct($name);
-        $this->roleService = new RoleService(getenv('MAILEON_PARTNER_API_KEY'));
+        $this->roleService = new RoleService(['API_KEY' => getenv('MAILEON_PARTNER_API_KEY')]);
         $this->nlAccountId = $this->getOneNewsLetterAccount()->id;
     }
 

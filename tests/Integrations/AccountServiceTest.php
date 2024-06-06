@@ -23,7 +23,7 @@ class AccountServiceTest extends TestCase
     public function __construct(string $name)
     {
         parent::__construct($name);
-        $this->accountService = new AccountService(getenv('MAILEON_PARTNER_API_KEY'));
+        $this->accountService = new AccountService(['API_KEY' => getenv('MAILEON_PARTNER_API_KEY')]);
     }
 
 

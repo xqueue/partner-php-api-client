@@ -4,7 +4,6 @@ namespace Xqueue\MaileonPartnerApiClient\Services;
 
 use CuyZ\Valinor\Mapper\MappingError;
 use Xqueue\MaileonPartnerApiClient\Entities\Blacklist;
-use Xqueue\MaileonPartnerApiClient\Http\Request;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\BlacklistResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
 
@@ -83,16 +82,14 @@ class BlacklistService extends PartnerApiService
      */
     public function updateBlacklist(int $id, string $name, string $status, ?string $type = null): BlacklistResponse
     {
-        $response = Request::send(
+        $response = $this->sendRequest(
             'PUT',
             'blacklists/' . $id,
             [
                 'name'   => $name,
                 'status' => $status,
                 'type'   => $type,
-            ],
-            [],
-            $this->key
+            ]
         );
 
         $data = $this->mapObject(Blacklist::class, $response->body);
@@ -107,7 +104,7 @@ class BlacklistService extends PartnerApiService
      */
     public function deleteBlacklist(int $id): GeneralResponse
     {
-        $response = Request::send('DELETE', 'blacklists/' . $id, [], [], $this->key);
+        $response =  $this->sendRequest('DELETE', 'blacklists/' . $id);
 
         return new GeneralResponse($response->body, $response);
     }
@@ -119,7 +116,7 @@ class BlacklistService extends PartnerApiService
      */
     public function getAccountsOfBlacklist(int $id): GeneralResponse
     {
-        $response = Request::send('GET', 'blacklists/' . $id . '/accounts', [], [], $this->key);
+        $response =  $this->sendRequest('GET', 'blacklists/' . $id . '/accounts');
 
         return new GeneralResponse($response->body, $response);
     }
@@ -132,12 +129,10 @@ class BlacklistService extends PartnerApiService
      */
     public function addAccountsToBlacklist(int $id, array $newsletterAccountIds): GeneralResponse
     {
-        $response = Request::send(
+        $response =  $this->sendRequest(
             'POST',
             'blacklists/' . $id . '/accounts',
-            ['newsletterAccountIds' => implode(',', $newsletterAccountIds)],
-            [],
-            $this->key
+            ['newsletterAccountIds' => implode(',', $newsletterAccountIds)]
         );
 
         return new GeneralResponse($response->body, $response);
@@ -152,12 +147,10 @@ class BlacklistService extends PartnerApiService
      */
     public function getPatternsOfBlacklist(int $id, int $pageIndex, int $pageSize): GeneralResponse
     {
-        $response = Request::send(
+        $response =  $this->sendRequest(
             'GET',
             'blacklists/' . $id . '/patterns',
-            ['page_size' => $pageSize, 'page_index' => $pageIndex],
-            [],
-            $this->key
+            ['page_size' => $pageSize, 'page_index' => $pageIndex]
         );
 
         return new GeneralResponse($response->body, $response);
@@ -172,12 +165,11 @@ class BlacklistService extends PartnerApiService
      */
     public function updatePatternsOfBlacklist(int $id, string $uploadName, array $patterns): GeneralResponse
     {
-        $response = Request::send(
+        $response =  $this->sendRequest(
             'POST',
             'blacklists/' . $id . '/patterns',
             [],
             ['uploadName' => $uploadName, 'patterns' => $patterns],
-            $this->key
         );
 
         return new GeneralResponse($response->body, $response);

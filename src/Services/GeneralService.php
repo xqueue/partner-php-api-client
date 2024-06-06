@@ -2,7 +2,6 @@
 
 namespace Xqueue\MaileonPartnerApiClient\Services;
 
-use Xqueue\MaileonPartnerApiClient\Http\Request;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\GeneralResponse;
 
 class GeneralService extends PartnerApiService
@@ -13,7 +12,7 @@ class GeneralService extends PartnerApiService
      */
     public function getDomains(): GeneralResponse
     {
-        $response = Request::send('GET', 'domains', [], [], $this->key);
+        $response =  $this->sendRequest('GET', 'domains');
 
         return new GeneralResponse($response->body['domains'], $response);
     }
@@ -25,7 +24,7 @@ class GeneralService extends PartnerApiService
      */
     public function validateDomain(string $domain): GeneralResponse
     {
-        $response = Request::send('GET', 'domains/validate', ['domain' => urlencode($domain)], [], $this->key);
+        $response =  $this->sendRequest('GET', 'domains/validate', ['domain' => urlencode($domain)]);
 
         if (! $response->isSuccess()) {
             $data = [
@@ -44,7 +43,7 @@ class GeneralService extends PartnerApiService
      */
     public function getLocales(): GeneralResponse
     {
-        $response = Request::send('GET', 'locales', [], [], $this->key);
+        $response =  $this->sendRequest('GET', 'locales');
 
         return new GeneralResponse($response->body['locales'], $response);
     }

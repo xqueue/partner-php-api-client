@@ -30,23 +30,24 @@ abstract class TestCase extends BaseTestCase
      */
     public function getOneNewsLetterAccount(): NewsletterAccount
     {
-        $accountService = new AccountService(getenv('MAILEON_PARTNER_API_KEY'));
-        $accounts = $accountService->getNewsletterAccounts();
-        $data = $accounts->getData();
+        $accountService = new AccountService(['API_KEY' => getenv('MAILEON_PARTNER_API_KEY')]);
+        $accounts       = $accountService->getNewsletterAccounts();
+        $data           = $accounts->getData();
 
         return $data[0];
     }
 
     /**
      * @param int $nlAccountId
+     *
      * @return MailingDomain
      * @throws MappingError
      */
     public function getOneMailingDomain(int $nlAccountId): MailingDomain
     {
-        $accountService = new AccountService(getenv('MAILEON_PARTNER_API_KEY'));
-        $domains = $accountService->getMailingDomains($nlAccountId);
-        $data = $domains->getData();
+        $accountService = new AccountService(['API_KEY' => getenv('MAILEON_PARTNER_API_KEY')]);
+        $domains        = $accountService->getMailingDomains($nlAccountId);
+        $data           = $domains->getData();
 
         return $data[0];
     }
@@ -57,9 +58,9 @@ abstract class TestCase extends BaseTestCase
      */
     public function getOneCustomerAccount(): CustomerAccount
     {
-        $customerService = new AccountService(getenv('MAILEON_PARTNER_API_KEY'));
-        $accounts = $customerService->getCustomerAccounts();
-        $data = $accounts->getData();
+        $customerService = new AccountService(['API_KEY' => getenv('MAILEON_PARTNER_API_KEY')]);
+        $accounts        = $customerService->getCustomerAccounts();
+        $data            = $accounts->getData();
 
         return $data[0];
     }

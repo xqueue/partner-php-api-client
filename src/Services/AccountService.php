@@ -8,7 +8,6 @@ use Xqueue\MaileonPartnerApiClient\Entities\ApiKey;
 use Xqueue\MaileonPartnerApiClient\Entities\CustomerAccount;
 use Xqueue\MaileonPartnerApiClient\Entities\MailingDomain;
 use Xqueue\MaileonPartnerApiClient\Entities\NewsletterAccount;
-use Xqueue\MaileonPartnerApiClient\Http\Request;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\AccountStatusResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\ApiKeyResponse;
 use Xqueue\MaileonPartnerApiClient\Http\Responses\CustomerAccountResponse;
@@ -192,12 +191,10 @@ class AccountService extends PartnerApiService
      */
     public function setNewsletterAccountStatus(int $id, string $status): AccountStatusResponse
     {
-        $response = Request::send(
+        $response = $this->sendRequest(
             'POST',
             'newsletter-accounts/' . $id . '/status',
-            ['status' => $status],
-            [],
-            $this->key
+            ['status' => $status]
         );
 
         $data = $this->mapObject(AccountStatus::class, $response->body);
@@ -243,12 +240,9 @@ class AccountService extends PartnerApiService
         int    $newsletterAccountId,
         string $mailingDomainName
     ): GeneralResponse {
-        $response = Request::send(
+        $response = $this->sendRequest(
             'POST',
             'newsletter-accounts/' . $newsletterAccountId . '/mailing-domains/' . urlencode($mailingDomainName),
-            [],
-            [],
-            $this->key
         );
 
         return new GeneralResponse($response->body, $response);
@@ -262,13 +256,9 @@ class AccountService extends PartnerApiService
      */
     public function getStatusOfMailingDomain(int $newsletterAccountId, string $mailingDomain): GeneralResponse
     {
-        $response = Request::send(
+        $response = $this->sendRequest(
             'GET',
-            'newsletter-accounts/' . $newsletterAccountId . '/mailing-domains/' .
-            urlencode($mailingDomain) . '/status',
-            [],
-            [],
-            $this->key
+            'newsletter-accounts/' . $newsletterAccountId . '/mailing-domains/' . urlencode($mailingDomain) . '/status',
         );
 
         return new GeneralResponse($response->body, $response);
@@ -286,13 +276,10 @@ class AccountService extends PartnerApiService
         string $mailingDomain,
         string $status
     ): GeneralResponse {
-        $response = Request::send(
+        $response = $this->sendRequest(
             'PUT',
-            'newsletter-accounts/' . $newsletterAccountId . '/mailing-domains/' .
-            urlencode($mailingDomain) . '/status',
-            ['newStatus' => $status],
-            [],
-            $this->key
+            'newsletter-accounts/' . $newsletterAccountId . '/mailing-domains/' . urlencode($mailingDomain) . '/status',
+            ['newStatus' => $status]
         );
 
         return new GeneralResponse($response->body, $response);
