@@ -8,6 +8,7 @@ Maileon's REST API documentation can be found [here](https://support.maileon.com
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Usage](#usage)
+* [Examples](#examples)
 * [Tests](#tests)
 
 
@@ -76,6 +77,49 @@ The API client divides the features of Maileon's Partner REST API into specific 
 
 * **WebhookService:**
     * Manage webhooks.
+
+## Examples
+Get Newsletter Accounts:
+```php
+$service = new AccountService(['API_KEY' => 'Your API key'])
+
+$response = $service->getNewsletterAccounts();
+
+if(!$response->getResponse()->isSuccess()){
+    // handle error
+}
+
+$newsletterAccounts = $response->getData();
+```
+
+Create Job:
+```php
+$service = new JobService(['API_KEY' => 'Your API key'])
+
+$response = $this->jobService->createAccountJob(
+            $locale,
+            $type,
+            $author,
+            $customerAccountName,
+            $newsletterAccountName,
+            $customDomain ?? null,
+            $providedDomain ?? null,
+            $subdomain ?? null,
+            $customDns ?? null,
+            $accountTemplateId ?? null,
+            $users ?? null,
+            $customerAccountId ?? null,
+            $domainAsLogin ?? null
+        );
+
+if(!$response->getResponse()->isSuccess()){
+    // handle error
+}
+
+$data = $response->getData();
+$jobId = $data['jobId'];
+```
+
 
 ## Tests
 In order to run the unit tests you need to have Docker installed.
