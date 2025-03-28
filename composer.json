@@ -54,6 +54,5 @@
   },
   "config": {
     "sort-packages": true
-  },
-  "version": "1.0.1"
+  }
 }
