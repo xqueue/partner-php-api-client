@@ -113,7 +113,8 @@ $response = $this->jobService->createAccountJob(
             $accountTemplateId ?? null,
             $users ?? null,
             $customerAccountId ?? null,
-            $domainAsLogin ?? null
+            $domainAsLogin ?? null,
+            $uiVersion ?? null
         );
 
 if(!$response->getResponse()->isSuccess()){
