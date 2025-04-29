@@ -42,12 +42,13 @@ class JobService extends PartnerApiService
      * @param int|null    $accountTemplateId
      * @param array|null  $users
      * @param int|null    $customerAccountId
-     * @param string|null $customerAccountName
-     * @param string|null $newsletterAccountName
+     * @param string      $customerAccountName
+     * @param string      $newsletterAccountName
      * @param string|null $customDomain
      * @param string|null $providedDomain
      * @param string|null $subdomain
      * @param bool|null   $domainAsLogin
+     * @param string|null $uiVersion
      *
      * @return GeneralResponse
      */
@@ -64,7 +65,8 @@ class JobService extends PartnerApiService
         ?int    $accountTemplateId = null,
         ?array  $users = null,
         ?int    $customerAccountId = null,
-        ?bool   $domainAsLogin = null
+        ?bool   $domainAsLogin = null,
+        ?string $uiVersion = null
     ): GeneralResponse {
         $data = [
             'locale'                => $locale,
@@ -80,6 +82,7 @@ class JobService extends PartnerApiService
             'providedDomain'        => $providedDomain,
             'subdomain'             => $subdomain,
             'domainAsLogin'         => $domainAsLogin,
+            'uiVersion'             => $uiVersion,
         ];
 
         $response = $this->create('account-jobs', $data);
